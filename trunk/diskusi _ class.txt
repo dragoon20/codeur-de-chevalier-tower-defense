@@ -1,0 +1,34 @@
+TOWER
+Attributes : 
+	Attack 
+	Element
+	x
+	y
+	Arah (bisa 8 arah mata angin)
+	Price
+	Range
+	Image
+	Name
+Method : 
+	...
+	Upgrade
+	
+
+ENEMY
+Attributes :
+	Speed
+	Health
+	x
+	y
+	image
+	Price
+	Name
+	Element
+Method : 
+	...
+	Upgrade
+	
+	
+FIELD
+	[][]Node, dimana Node adalah class yang terdiri dari background_image
+	
