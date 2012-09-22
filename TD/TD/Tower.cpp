@@ -1,3 +1,4 @@
+#include "StdAfx.h"
 #include "Tower.h"
 #include <stdio.h>
 #include <string.h>
@@ -17,27 +18,27 @@ Tower::Tower() {
 Tower::Tower(int basis, int ordinat, char* name) {
 	x = basis;
 	y = ordinat;
-	if (strcmp(name,"Tower_Batu") == 0) { //Batu
-		Price = 1500; 
+	if (strcmp(name,"Amber") == 0) { //Fire Level 1 
+		Price = 12; 
 		Range = 1;
-		Attack = 5;
-		strcpy(Element, "Batu");
+		Attack = 50;
+		strcpy(Element, "Fire");
 		Target = NULL;
 		strcpy(Nama, name);
 	}
-	if (strcmp(name, "Tower_Gunting") == 0) { //Gunting
-		Price = 1250; 
+	if (strcmp(name, "Splash") == 0) { //Water Level 1
+		Price = 12; 
 		Range = 1;
-		Attack = 5;
-		strcpy(Element,"Gunting");
+		Attack = 50;
+		strcpy(Element,"Water");
 		Target = NULL;
 		strcpy(Nama, name);
 	}
-	if (strcmp(name, "Tower_Kertas") == 0) { //Kertas
-		Price = 1000; 
+	if (strcmp(name, "Sprout") == 0) { //Nature Level 1
+		Price = 12; 
 		Range = 1;
-		Attack = 5;
-		strcpy(Element,"Kertas");
+		Attack = 50;
+		strcpy(Element,"Nature");
 		Target = NULL;
 		strcpy(Nama, name);
 	}
@@ -135,5 +136,25 @@ int Tower::getAttack() {
 }
 
 Tower Tower::Upgrade(char* Name) {
-	
+	if (strcmp(Name, "Amber") == 0) {
+		strcpy(Nama, "Blaze");
+		Price = 30; 
+		Range = 1;
+		Attack = 150;
+	}
+	else
+	if (strcmp(Name, "Splash") == 0) {
+		strcpy(Nama, "Torrent");
+		Price = 30; 
+		Range = 2;
+		Attack = 100;
+	}
+	else
+	if (strcmp(Name, "Sprout") == 0) {
+		strcpy(Nama, "Meadow");
+		Price = 30; 
+		Range = 3;
+		Attack = 50;
+	}
+	return *this;
 }
