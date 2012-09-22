@@ -1,0 +1,63 @@
+TOWER
+Level 1 : 
+	Amber (Fire)
+		Price = 12
+		Range = 1
+		Attack = 50
+	Splash (Water)
+		Price = 12
+		Range = 1
+		Attack = 50
+	Sprout (Nature)
+		Price = 12
+		Range = 1
+		Attack = 50
+Level 2 : 
+	Blaze (Fire)
+		Price = 30
+		Range = 1
+		Attack = 150
+	Torrent (Water)
+		Price = 30
+		Range = 2
+		Attack = 100
+	Meadow (Nature)
+		Price = 30
+		Range = 3
+		Attack = 50
+
+
+ENEMY
+Level 1 : 
+	Salamender (Fire)
+		Price = 2
+		Reward = 1
+		Income = 1
+		Health = 75
+	LizardMan (Water)
+		Price = 2
+		Reward = 1
+		Income = 1
+		Health = 75
+	Mandragora (Nature)
+		Price = 2
+		Reward = 1
+		Income = 1
+		Health = 75
+
+Level 2 : 
+	Efreet (Fire)
+		Price = 30
+		Reward = 15
+		Income = 5
+		Health = 225
+	Undine (Water)
+		Price = 30
+		Reward = 15
+		Income = 5
+		Health = 150
+	Dryad (Nature)
+		Price = 30
+		Reward = 15
+		Income = 5
+		Health = 300
