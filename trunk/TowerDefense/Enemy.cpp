@@ -1,3 +1,4 @@
+#include "StdAfx.h"
 #include "Enemy.h"
 #include <cstring>
 
@@ -116,6 +117,16 @@ int Enemy::getPrice()
 	return Price;
 }
 
+int Enemy::getIncome()
+{
+	return Income;
+}
+
+int Enemy::getReward()
+{
+	return Reward;
+}
+
 char * Enemy::getName()
 {
 	// masih ragu
@@ -163,6 +174,16 @@ void Enemy::setPrice(int Price)
 	this->Price = Price;
 }
 
+void Enemy::setIncome(int Income)
+{
+	this->Income = Income;
+}
+
+void Enemy:setReward(int Reward)
+{
+	this->Reward = Reward;
+}
+
 void Enemy::setName(char* Name)
 {
 	strcpy(this->Name,Name);
@@ -197,4 +218,5 @@ Enemy Enemy::Upgrade (char* Name)
 		aHealth = 1;
 		strcpy(Element,"");
 	}
+	return *this;
 }
