@@ -11,6 +11,8 @@ class Enemy
 		int x;
 		int y;
 		int Price;
+		int Income;
+		int Reward;
 		char * Name;
 		char * Element;
 	public:
@@ -27,6 +29,8 @@ class Enemy
 		int getx();
 		int gety();
 		int getPrice();
+		int getIncome();
+		int getReward();
 		char * getName();
 		char * getElement();
 		
@@ -37,6 +41,8 @@ class Enemy
 		void setx(int);
 		void sety(int);
 		void setPrice(int);
+		void setIncome(int);
+		void setReward(int);
 		void setName(char*);
 		void setElement(char*);
 		
