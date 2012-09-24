@@ -16,9 +16,16 @@ void SplashScreen::Show(sf::RenderWindow & renderWindow)
 	renderWindow.Display();
 
 	sf::Event event;
-	long long temp = 1000000000;
-	while(temp--!=0)
+	while(true)
 	{
+		while(renderWindow.GetEvent(event))
+		{
+		if(event.Type == sf::Event::EventType::KeyPressed
+		|| event.Type == sf::Event::EventType::MouseButtonPressed
+		|| event.Type == sf::Event::EventType::Closed )
+			{
+				return;
+			}
+		}
 	}
-	return;
 }

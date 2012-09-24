@@ -11,4 +11,6 @@ public :
 	~Node();
 	void setProperties(char c);
 	char getProperties();
+
+	void Scale(float sx, float sy);
 };

@@ -15,3 +15,7 @@ using namespace std;
 	char Node::getProperties(){
 		return properties;
 	}
+
+	void Node::Scale(float sx, float sy){
+		GetSprite().SetScale(sx, sy);
+	}
