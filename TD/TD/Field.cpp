@@ -44,6 +44,7 @@
 	void Field::Load(string inputfile){
 		string line[50];
 		int i, j;
+		cout << "Generating map . . ." << endl;
 		ifstream myfile (inputfile);
 		if (myfile.is_open())
 		{
@@ -69,15 +70,15 @@
 				switch (node[i][j].getProperties()){
 					case 'X' :
 						{
-						node[i][j].Load("images/X.png"); 
-						node[i][j].SetPosition(j*32, i*32); 
+						node[i][j].Load("images/X.png");
 						break;}
 					case 'O' :
 						{
 						node[i][j].Load("images/O.png"); 
-						node[i][j].SetPosition(j*32, i*32);
 						break;}
 				}
+				node[i][j].Scale(2.0f, 2.0f);
+				node[i][j].SetPosition(j*64, i*64);
 			}
 		}
 	 }

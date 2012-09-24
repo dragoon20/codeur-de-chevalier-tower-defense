@@ -8,7 +8,7 @@ void Game::Start(void)
   if(_gameState != Uninitialized)
     return;
 
-  _mainWindow.Create(sf::VideoMode(1024,768,32),"Pang!");
+  _mainWindow.Create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32),"La tour de défense");
   _field.Load("example.txt");
   _gameState = Game::ShowingSplash;
   
@@ -28,11 +28,26 @@ bool Game::IsExiting()
     return false;
 }
 
+sf::RenderWindow& Game::GetWindow()
+{
+	return _mainWindow;
+}
+
+const sf::Input& Game::GetInput() 
+{
+	return _mainWindow.GetInput();
+}
+
+const GameObjectManager& Game::GetGameObjectManager()
+{
+	return _gameObjectManager;
+}
+
+
 void Game::GameLoop()
 {
   sf::Event currentEvent;
-  while(_mainWindow.GetEvent(currentEvent))
-  {
+  _mainWindow.GetEvent(currentEvent);
   
     switch(_gameState)
     {
@@ -50,16 +65,22 @@ void Game::GameLoop()
         {
           _mainWindow.Clear(sf::Color(0,0,0));
 		  _field.Draw(_mainWindow);
+		  
+		  _gameObjectManager.UpdateAll();
+		  _gameObjectManager.DrawAll(_mainWindow);
+		  
 		  _mainWindow.Display();
-        
-          if(currentEvent.Type == sf::Event::Closed || currentEvent.Key.Code == sf::Key::Escape)
-            {
-              _gameState = Game::Exiting;
-            }
-          break;
+		  if(currentEvent.Type == sf::Event::Closed) _gameState = Game::Exiting;
+
+		  if(currentEvent.Type == sf::Event::KeyPressed)
+			{
+				if(currentEvent.Key.Code == sf::Key::Escape) ShowMenu();
+			}
+
+		  break;
         }
     }
-  }
+  
 }
 
 void Game::ShowSplashScreen()
@@ -86,4 +107,5 @@ void Game::ShowMenu()
 
 Game::GameState Game::_gameState = Uninitialized;
 sf::RenderWindow Game::_mainWindow;
+GameObjectManager Game::_gameObjectManager;
 Field Game::_field;

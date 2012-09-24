@@ -13,6 +13,7 @@ public:
   VisibleGameObject* Get(std::string name) const;
 
   void DrawAll(sf::RenderWindow& renderWindow);
+  void UpdateAll();
 
 private:
   std::map<std::string, VisibleGameObject*> _gameObjects;

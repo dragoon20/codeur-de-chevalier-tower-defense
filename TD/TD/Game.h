@@ -2,6 +2,7 @@
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 #include "Field.h"
+#include "GameObjectManager.h"
 
 
 class Game
@@ -9,11 +10,17 @@ class Game
 
 public:
   static void Start();
+  static sf::RenderWindow& GetWindow();
+  const static sf::Input& GetInput(); 
+  const static GameObjectManager& GetGameObjectManager();
+
+  const static int SCREEN_WIDTH = 1024;
+  const static int SCREEN_HEIGHT = 768;
 
 private:
   static bool IsExiting();
   static void GameLoop();
-
+  
   static void ShowSplashScreen();
   static void ShowMenu();
 
@@ -22,5 +29,7 @@ private:
   
   static GameState _gameState;
   static sf::RenderWindow _mainWindow;
+  
+  static GameObjectManager _gameObjectManager;
   static Field _field;
 };

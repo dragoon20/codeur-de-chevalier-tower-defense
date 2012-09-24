@@ -42,7 +42,13 @@
     <ClInclude Include="VisibleGameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\TowerDefense\Enemy.h">
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,7 +77,13 @@
     <ClCompile Include="VisibleGameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\TowerDefense\Enemy.cpp">
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
