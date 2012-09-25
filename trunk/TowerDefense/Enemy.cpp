@@ -1,53 +1,63 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "Enemy.h"
-#include <cstring>
+#include <cstdlib>
 
 Enemy::Enemy()
 {
-	// ga mungkin dipanggil
 	Speed = 0;
 	aSpeed = 0;
 	Health = 0;
 	aHealth = 0;
-	x = 0;
-	y = 0;
+	x = -1;
+	y = -1;
 	Price = 0;
-	strcpy(Name,"");
-	strcpy(Element,"");
+	Income = 0;
+	Reward = 0;
+	Name = "";
+	Element = "";
 }
 
-Enemy::Enemy(char* Name)
+Enemy::Enemy(string Name)
 {
-	strcpy(this->Name,Name);
-	if (strcmp(Name,""))
+	this->Name = Name;
+	if (Name=="Salamander")
 	{
 		x = -1;
 		y = -1;
 		Speed = 1;
 		aSpeed = 1;
-		Health = 1;
-		aHealth = 1;
-		strcpy(Element,"");
+		Health = 75;
+		aHealth = 75;
+		Price = 2;
+		Income = 1;
+		Reward = 1;
+		Element = "Fire";
 	}
-	else if (strcmp(Name,""))
+	else if (Name=="Lizardman")
 	{
 		x = -1;
 		y = -1;
 		Speed = 1;
 		aSpeed = 1;
-		Health = 1;
-		aHealth = 1;
-		strcpy(Element,"");
+		Health = 75;
+		aHealth = 75;
+		Price = 2;
+		Income = 1;
+		Reward = 1;
+		Element = "Water";
 	}
-	else if (strcmp(Name,""))
+	else if (Name=="Mandragora")
 	{
 		x = -1;
 		y = -1;
 		Speed = 1;
 		aSpeed = 1;
-		Health = 1;
-		aHealth = 1;
-		strcpy(Element,"");
+		Health = 75;
+		aHealth = 75;
+		Price = 2;
+		Income = 1;
+		Reward = 1;
+		Element = "Nature";
 	}
 }
 
@@ -64,8 +74,10 @@ Enemy::Enemy(const Enemy& E)
 	Health = E.Health;
 	aHealth = E.aHealth;
 	Price = E.Price;
-	strcpy(Name,E.Name);
-	strcpy(Element,E.Element);
+	Income = E.Income;
+	Reward = E.Reward;
+	Name = E.Name;
+	Element = E.Element;
 }
 
 Enemy& Enemy::operator = (const Enemy& E)
@@ -77,8 +89,10 @@ Enemy& Enemy::operator = (const Enemy& E)
 	Health = E.Health;
 	aHealth = E.aHealth;
 	Price = E.Price;
-	strcpy(Name,E.Name);
-	strcpy(Element,E.Element);
+	Income = E.Income;
+	Reward = E.Reward;
+	Name = E.Name;
+	Element = E.Element;
 	return *this;
 }
 
@@ -127,15 +141,20 @@ int Enemy::getReward()
 	return Reward;
 }
 
-char * Enemy::getName()
+int Enemy::getPos()
 {
-	// masih ragu
+	return Pos;
+}
+
+string Enemy::getName()
+{
+	// sudah yakin
 	return Name;
 }
 
-char * Enemy::getElement()
+string Enemy::getElement()
 {
-	// masih ragu
+	// sudah yakin
 	return Element;
 }
 
@@ -179,44 +198,134 @@ void Enemy::setIncome(int Income)
 	this->Income = Income;
 }
 
-void Enemy:setReward(int Reward)
+void Enemy::setReward(int Reward)
 {
 	this->Reward = Reward;
 }
 
-void Enemy::setName(char* Name)
+void Enemy::setPos(int Pos)
 {
-	strcpy(this->Name,Name);
+	this->Pos = Pos;
 }
 
-void Enemy::setElement(char* Element)
+void Enemy::setName(string Name)
 {
-	strcpy(this->Element,Element);
+	this->Name = Name;
 }
 
-Enemy Enemy::Upgrade (char* Name)
+void Enemy::setElement(string Element)
 {
-	if ((strcmp(this->Name,"")==0)&&(strcmp(Name,"")==0))
+	this->Element = Element;
+}
+
+Enemy* getEnemylist ()
+{
+	static Enemy* pointer;
+	pointer = new Enemy[3];
+	
+	pointer[0].setName("Salamander");
+	pointer[0].setSpeed(1);
+	pointer[0].setHealth(75);
+	pointer[0].setPrice(2);
+	pointer[0].setIncome(1);
+	pointer[0].setElement("Fire");
+	
+	pointer[1].setName("Lizardman");
+	pointer[1].setSpeed(1);
+	pointer[1].setHealth(75);
+	pointer[1].setPrice(2);
+	pointer[1].setIncome(1);
+	pointer[1].setElement("Water");
+	
+	pointer[2].setName("Mandragora");
+	pointer[2].setSpeed(1);
+	pointer[2].setHealth(75);
+	pointer[2].setPrice(2);
+	pointer[2].setIncome(1);
+	pointer[2].setElement("Nature");
+
+	return pointer;
+}
+
+Enemy Enemy::Upgrade (string Name)
+{
+	if ((this->Name=="Salamander")&&(Name=="Efreet"))
 	{
-		strcpy(this->Name,Name);
+		this->Name = Name;
 		x = -1;
 		y = -1;
 		Speed = 1;
 		aSpeed = 1;
-		Health = 1;
-		aHealth = 1;
-		strcpy(Element,"");
+		Health = 225;
+		aHealth = 225;
+		Price = 30;
+		Income = 5;
+		Reward = 5;
+		Element = "Fire";
 	}
-	else if ((strcmp(this->Name,"")==0)&&(strcmp(Name,"")==0))
+	else if ((this->Name=="Lizardman")&&(Name=="Undine"))
 	{
-		strcpy(this->Name,Name);
+		this->Name = Name;
 		x = -1;
 		y = -1;
 		Speed = 1;
 		aSpeed = 1;
-		Health = 1;
-		aHealth = 1;
-		strcpy(Element,"");
+		Health = 150;
+		aHealth = 150;
+		Price = 30;
+		Income = 5;
+		Reward = 5;
+		Element = "Water";
+	}
+	else if ((this->Name=="Mandragora")&&(Name=="Dryad"))
+	{
+		this->Name = Name;
+		x = -1;
+		y = -1;
+		Speed = 1;
+		aSpeed = 1;
+		Health = 300;
+		aHealth = 300;
+		Price = 30;
+		Income = 5;
+		Reward = 5;
+		Element = "Nature";
 	}
 	return *this;
+}
+
+Enemy* Enemy::getUpgradelist (string Name)
+{
+	Enemy* pointer;
+	if (Name=="Salamander")
+	{
+		pointer = new Enemy[1];
+		pointer[0].setName("Efreet");
+		pointer[0].setSpeed(1);
+		pointer[0].setHealth(225);
+		pointer[0].setPrice(30);
+		pointer[0].setIncome(5);
+		pointer[0].setElement("Fire");
+	}
+	else if (this->Name=="Lizardman")
+	{
+		pointer = new Enemy[1];
+		pointer[0].setName("Undine");
+		pointer[0].setSpeed(1);
+		pointer[0].setHealth(150);
+		pointer[0].setPrice(30);
+		pointer[0].setIncome(5);
+		pointer[0].setElement("Water");
+	}
+	else if (this->Name=="Mandragora")
+	{
+		pointer = new Enemy[1];
+		pointer[0].setName("Undine");
+		pointer[0].setSpeed(1);
+		pointer[0].setHealth(300);
+		pointer[0].setPrice(30);
+		pointer[0].setIncome(5);
+		pointer[0].setElement("Nature");
+	}
+	return pointer;
 }

@@ -1,6 +1,10 @@
 #ifndef __ENEMY__
 #define __ENEMY__
 
+#include <string>
+
+using namespace std;
+
 class Enemy
 {
 	private:
@@ -13,11 +17,12 @@ class Enemy
 		int Price;
 		int Income;
 		int Reward;
-		char * Name;
-		char * Element;
+		int Pos;
+		string Name;
+		string Element;
 	public:
 		Enemy();
-		Enemy(char*);
+		Enemy(string);
 		~Enemy();
 		Enemy(const Enemy&);
 		Enemy& operator = (const Enemy&);
@@ -31,8 +36,9 @@ class Enemy
 		int getPrice();
 		int getIncome();
 		int getReward();
-		char * getName();
-		char * getElement();
+		int getPos();
+		string getName();
+		string getElement();
 		
 		void setSpeed(int);
 		void setaSpeed(int);
@@ -43,10 +49,14 @@ class Enemy
 		void setPrice(int);
 		void setIncome(int);
 		void setReward(int);
-		void setName(char*);
-		void setElement(char*);
+		void setPos(int);
+		void setName(string);
+		void setElement(string);
 		
-		Enemy Upgrade (char*);
+		Enemy Upgrade (string);
+		Enemy* getUpgradelist (string);
 };
+
+Enemy* getEnemylist ();
 
 #endif
