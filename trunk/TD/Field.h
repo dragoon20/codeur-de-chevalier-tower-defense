@@ -12,6 +12,8 @@ private :
 	Node node[50][50];
 	Node Start;
 	Node Finish;
+	sf::Image _image;
+	sf::Sprite _sprite;
 public :
 	Field();
 	Field(int w, int h);

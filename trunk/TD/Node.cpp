@@ -3,11 +3,11 @@
 using namespace std;
 	Node::Node(){
 		_properties = 'O';
-		_isLoaded = false;
+		//_isLoaded = false;
 	}
 	Node::Node(char c){
 		_properties = c;
-		_isLoaded = false;
+		//_isLoaded = false;
 	}
 	Node::~Node(){
 	}
@@ -18,13 +18,13 @@ using namespace std;
 		return _properties;
 	}
 
-	sf::Sprite& Node::GetSprite()
+	/*sf::Sprite& Node::GetSprite()
 	{
 		return _sprite;
 	}
-	/*void Node::Scale(float sx, float sy){
+	void Node::Scale(float sx, float sy){
 		GetSprite().SetScale(sx, sy);
-	}*/
+	}
 
 	void Node::Load(){
 		switch (_properties){
@@ -67,14 +67,14 @@ using namespace std;
 			default :
 				{break;}
 		}
-		/*	currentFrame = 0;
+			currentFrame = 0;
 			currentPose = 0;
 			elapseTime = 0;
 			maxFrame = 0;
-			frameChangeTime = 20;*/
+			frameChangeTime = 20;
 	}
 	void Node::Draw(sf::RenderWindow &renderWindow){
 		if (_isLoaded){
 			renderWindow.Draw(_sprite);
 		}
-	}
+	}*/
