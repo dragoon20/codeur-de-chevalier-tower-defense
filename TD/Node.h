@@ -5,9 +5,9 @@
 class Node {
 private :
 	char _properties;
-	bool _isLoaded;
-	sf::Image _image;
-	sf::Sprite _sprite;
+	//bool _isLoaded;
+	//sf::Image _image;
+	//sf::Sprite _sprite;
 public :
 	Node();
 	Node(char c);
@@ -16,6 +16,6 @@ public :
 	char getProperties();
 	sf::Sprite& GetSprite();
 
-	void Load();
-	void Draw(sf::RenderWindow &renderWindow);
+	/*void Load();
+	void Draw(sf::RenderWindow &renderWindow);*/
 };
