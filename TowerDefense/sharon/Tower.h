@@ -17,7 +17,7 @@ class Tower {
 		void setPrice(int);
 		void setElement(string);
 		void setNama(string);
-		void setTarget(string);
+		void setTarget(int);
 		void setRange(int);
 		void setAttack(int);
 
@@ -26,7 +26,7 @@ class Tower {
 		int getPrice();
 		string getElement();
 		string getNama();
-		string getTarget();
+		int getTarget();
 		int getRange();
 		int getAttack();
 
@@ -41,7 +41,7 @@ class Tower {
 		int Attack;
 		string Element;
 		string Nama;
-		string Target; // ID musuh
+		int Target; // nomor urut musuh pada array di controller
 };
 
 Tower* getTowerList();
