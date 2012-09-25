@@ -6,7 +6,7 @@
 		height = 50;
 		for (int i=0; i<width; i++){
 			for (int j=0; j<height; j++){
-				node[i][j].setProperties('X'); 
+				node[i][j].setProperties('O'); 
 			}
 		}
 	}
@@ -33,13 +33,13 @@
 	int Field::getHeight(){
 		return height;
 	}
-	Node Field::getNode(int i, int j){
+	/*Node Field::getNode(int i, int j){
 		return node[i][j];
 	}
 
 	Node& Field::getNode2(int i, int j){
 		return node[i][j];
-	}
+	}*/
 
 	void Field::Load(string inputfile){
 		string line[50];
@@ -69,19 +69,37 @@
 			for (int j=0; j<height; j++){
 				switch (node[i][j].getProperties()){
 					case 'X' :
-						{
-						node[i][j].Load("images/X.png");
-						break;}
+					{
+						node[i][j].Load();
+						break;
+					}
 					case 'O' :
-						{
-						node[i][j].Load("images/O.png"); 
-						break;}
+					{
+						node[i][j].Load(); 
+						break;
+					}
+					case 'S' :
+					{
+						node[i][j].Load();
+						Start = node[i][j];
+						break;
+					}
+					case 'F' :
+					{
+						node[i][j].Load();
+						Finish = node[i][j];
+						break;
+					}
+					default :
+					{
+						break;
+					}
+
 				}
-				node[i][j].Scale(2.0f, 2.0f);
-				node[i][j].SetPosition(j*64, i*64);
+				node[i][j].GetSprite().SetPosition(j*64, i*64);
 			}
 		}
-	 }
+	}
 
 	  else 
 		  cout << "Unable to open file"; 
@@ -92,10 +110,29 @@
 			for (int j=0; j<height; j++){
 				switch (node[i][j].getProperties()){
 					case 'X' :
-						{node[i][j].Draw(renderWindow); break;}
+					{
+						node[i][j].Draw(renderWindow);
+						break;
+					}
 					case 'O' :
-						{node[i][j].Draw(renderWindow); break;}
+					{
+						node[i][j].Draw(renderWindow); 
+						break;
+					}
+					case 'S' :
+					{
+						node[i][j].Draw(renderWindow); 
+						break;
+					}
+					case 'F' :
+					{
+						node[i][j].Draw(renderWindow); 
+						break;
+					}
+					default :
+					{break;}
 				}
+				//{node[i][j].Draw(renderWindow); break;}
 			}
 		}
 	}

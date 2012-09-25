@@ -1,10 +1,13 @@
 #ifndef TOWER_H
 #define TOWER_H
 
+#include <string>
+using namespace std;
+
 class Tower {
 	public:
 		Tower();
-		Tower(int,int,char*); //Tower(x,y,Element)
+		Tower(int,int,string); //Tower(x,y,Element)
 		~Tower();
 		Tower(const Tower&);
 		Tower& operator= (const Tower&);
@@ -12,31 +15,34 @@ class Tower {
 		void setX(int);
 		void setY(int);
 		void setPrice(int);
-		void setElement(char*);
-		void setNama(char*);
-		void setTarget(char*);
+		void setElement(string);
+		void setNama(string);
+		void setTarget(int);
 		void setRange(int);
 		void setAttack(int);
 
 		int getX();
 		int getY();
 		int getPrice();
-		char* getElement();
-		char* getNama();
-		char* getTarget();
+		string getElement();
+		string getNama();
+		int getTarget();
 		int getRange();
 		int getAttack();
 
-		Tower Upgrade(char* Name);
-		
+		Tower Upgrade(string);
+		Tower* getUpgradelist(string);
+	
 	private:
 		int x; //absis
 		int y; //ordinat
 		int Price; //harga beli tower
 		int Range; //jarak tembakan
 		int Attack;
-		char* Element;
-		char* Nama;
-		char* Target; // ID musuh
+		string Element;
+		string Nama;
+		int Target; // nomor urut musuh pada array di controller
 };
+
+Tower* getTowerList();
 #endif

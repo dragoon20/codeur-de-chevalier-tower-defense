@@ -2,15 +2,20 @@
 #include "SFML/Graphics.hpp"
 #include "VisibleGameObject.h"
 
-class Node : public VisibleGameObject {
+class Node {
 private :
-	char properties;
+	char _properties;
+	bool _isLoaded;
+	sf::Image _image;
+	sf::Sprite _sprite;
 public :
 	Node();
 	Node(char c);
 	~Node();
 	void setProperties(char c);
 	char getProperties();
+	sf::Sprite& GetSprite();
 
-	void Scale(float sx, float sy);
+	void Load();
+	void Draw(sf::RenderWindow &renderWindow);
 };
