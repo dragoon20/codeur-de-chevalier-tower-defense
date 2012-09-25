@@ -9,7 +9,7 @@ Tower::Tower() {
 	Attack = 0;
 	Element = "";
 	Nama = "";
-	Target = "";
+	Target = -1;
 }
 
 Tower::Tower(int basis, int ordinat, string name) {
@@ -21,21 +21,21 @@ Tower::Tower(int basis, int ordinat, string name) {
 		Range = 1;
 		Attack = 50;
 		Element = "Fire";
-		Target = "";
+		Target = -1;
 	}
 	if (name == "Splash") { //Water Level 1
 		Price = 12; 
 		Range = 1;
 		Attack = 50;
 		Element = "Water";
-		Target = "";
+		Target = -1;
 	}
 	if (name == "Sprout") { //Nature Level 1
 		Price = 12; 
 		Range = 1;
 		Attack = 50;
 		Element = "Nature";
-		Target = "";
+		Target = -1;
 	}
 }
 
@@ -86,7 +86,7 @@ void Tower::setNama(string newNama) {
 	Nama = newNama;
 }
 
-void Tower::setTarget(string newTarget) {
+void Tower::setTarget(int newTarget) {
 	Target = newTarget;
 }
 
@@ -114,7 +114,7 @@ string Tower::getElement() {
 	return Element;
 }
 
-string Tower::getTarget() {
+int Tower::getTarget() {
 	return Target;
 }
 

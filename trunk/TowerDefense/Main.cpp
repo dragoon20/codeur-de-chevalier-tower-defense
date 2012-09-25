@@ -18,6 +18,7 @@ int main()
 	int playergold = 10;
 	
 	Enemy * listmusuh = getEnemylist();
+	// Tower* list_tower = getTowerList();
 
 	bool cekpersiapan;
 	bool cekwave;
