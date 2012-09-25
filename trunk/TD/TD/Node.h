@@ -1,10 +1,9 @@
-#include "stdafx.h"
-#include "SFML/Graphics.hpp"
-#include "VisibleGameObject.h"
+#ifndef __NODE__
+#define __NODE__
 
-class Node : public VisibleGameObject {
+class Node {
 private :
-	char properties;
+	char _properties;
 public :
 	Node();
 	Node(char c);
@@ -12,5 +11,6 @@ public :
 	void setProperties(char c);
 	char getProperties();
 
-	void Scale(float sx, float sy);
 };
+
+#endif

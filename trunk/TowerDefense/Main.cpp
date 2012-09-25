@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include "Tower.h"
-//#include "Field.h"
+#include "Field.h"
 #include <cstdio>
 #include <iostream>
 #include <cmath>
@@ -18,7 +18,7 @@ int main()
 	int playergold = 10;
 	
 	Enemy * listmusuh = getEnemylist();
-	// Tower* list_tower = getTowerList();
+	Tower * listtower = getTowerList();
 
 	bool cekpersiapan;
 	bool cekwave;
