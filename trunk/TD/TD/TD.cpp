@@ -29,6 +29,12 @@ static sf::RenderWindow _mainWindow;
 static GameObjectManager _gameObjectManager;
 static Field _field;
 
+static sf::Image	_imageTower;
+static sf::Sprite	_spriteTower;
+
+static sf::Image	_imageEnemy;
+static sf::Sprite	_spriteEnemy;
+
 bool IsExiting()
 {
   if(_gameState == Exiting) 
@@ -68,9 +74,9 @@ int main()
 	int enemygold = 10;
 	int playergold = 10;
 	musuh.push_back(Enemy("Salamander"));
-	tower.push_back(Tower(2,4,"Splash"));
+	tower.push_back(Tower(2,5,"Splash"));
 	tower.push_back(Tower(2,3,"Splash"));
-	tower.push_back(Tower(3,4,"Splash"));
+	tower.push_back(Tower(3,5,"Splash"));
 	tower.push_back(Tower(3,3,"Splash"));
 	Enemy * listmusuh = getEnemylist();
 	Tower * listtower = getTowerList();
@@ -86,6 +92,13 @@ int main()
 
 	_mainWindow.Create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32),"La tour de défense");
 	_field.Load("example.txt");
+	
+	_imageTower.LoadFromFile("images/tower.png");
+	_spriteTower.SetImage(_imageTower);
+
+	_imageEnemy.LoadFromFile("images/enemy.png");
+	_spriteEnemy.SetImage(_imageEnemy);
+
 	_gameState = ShowingSplash;
   
 	while(!IsExiting())
@@ -109,6 +122,20 @@ int main()
 			{
 				_mainWindow.Clear(sf::Color(0,0,0));
 				_field.Draw(_mainWindow);
+				for (int i=0;i<tower.size();++i){
+					_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
+					_mainWindow.Draw(_spriteTower);
+				}
+				/*for (int i=0;i<musuh.size();++i){
+					if (musuh[i].getaHealth() <= 0){
+						cout << "DRAW!" <<endl;
+						_spriteEnemy.SetPosition(musuh[i].getX()*64, musuh[i].getY()*64);
+						_mainWindow.Draw(_spriteEnemy);
+					}
+					else {
+						cout << "DI LUAR DRAW!" <<endl;
+					}
+				}*/
 		  
 				_gameObjectManager.UpdateAll();
 				_gameObjectManager.DrawAll(_mainWindow);
@@ -147,11 +174,11 @@ int main()
 				for (int j=musuh.size()-1;j>=0;--j)
 				{
 					// set urutan, darah, kecepatan, posisi musuh dan musuh dapat pemasukan
-					musuh[j].setPos(musuh.size()*-1-1);
+					musuh[j].setPos(j*-1-1);
 					musuh[j].setaHealth(musuh[j].getHealth());
 					musuh[j].setaSpeed(musuh[j].getSpeed());
 					musuh[j].setX(-1);
-					musuh[j].setY(5);
+					musuh[j].setY(4);
 					enemygold += musuh[j].getIncome();
 				}
 				// 
@@ -276,6 +303,9 @@ int main()
 										break;
 									}
 								}
+								_spriteEnemy.SetPosition(musuh[j].getX()*64, musuh[j].getY()*64);
+								_mainWindow.Draw(_spriteEnemy);
+								for (int l=0;l<10000000;l++);
 							}
 						}
 						else if (musuh[j].getPos()<0)
