@@ -53,6 +53,8 @@ class Enemy
 		void setName(string);
 		void setElement(string);
 		
+		void move(int);
+
 		Enemy Upgrade (string);
 		Enemy* getUpgradelist (string);
 };

@@ -1,7 +1,8 @@
-#ifndef TOWER_H
-#define TOWER_H
+#ifndef __TOWER__
+#define __TOWER__
 
 #include <string>
+#include "Enemy.h"
 using namespace std;
 
 class Tower {
@@ -29,6 +30,8 @@ class Tower {
 		int getTarget();
 		int getRange();
 		int getAttack();
+
+		void attack(Enemy*);
 
 		Tower Upgrade(string);
 		Tower* getUpgradelist(string);

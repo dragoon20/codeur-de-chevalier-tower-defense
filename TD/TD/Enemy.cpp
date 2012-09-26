@@ -218,6 +218,33 @@ void Enemy::setElement(string Element)
 	this->Element = Element;
 }
 
+void Enemy::move(int flag)
+{
+	switch(flag)
+	{
+		case 0: // ke atas
+		{
+			y-=1;
+			break;
+		}
+		case 1: // ke kanan
+		{
+			x+=1;
+			break;
+		}
+		case 2: // ke bawah
+		{
+			y+=1;
+			break;
+		}
+		case 3: // ke kiri
+		{
+			x-=1;
+			break;
+		}
+	}
+}
+
 Enemy* getEnemylist ()
 {
 	static Enemy* pointer;
