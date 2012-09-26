@@ -131,6 +131,30 @@ int Tower::getAttack() {
 	return Attack;
 }
 
+void Tower::attack(Enemy* E)
+{
+	if (((Element=="Fire")&&((*E).getElement()=="Nature"))||
+		((Element=="Nature")&&((*E).getElement()=="Water"))||
+		((Element=="Water")&&((*E).getElement()=="Fire")))
+	{
+		// serangan unggul
+		(*E).setaHealth((*E).getaHealth()-(Attack*2));
+	}
+	else
+	if (((Element=="Water")&&((*E).getElement()=="Nature"))||
+		((Element=="Fire")&&((*E).getElement()=="Water"))||
+		((Element=="Nature")&&((*E).getElement()=="Fire")))
+	{
+		// serangan lemah
+		(*E).setaHealth((*E).getaHealth()-(Attack/2));
+	}
+	else
+	{
+		// serangan biasa
+		(*E).setaHealth((*E).getaHealth()-Attack);
+	}									
+}
+
 Tower Tower::Upgrade(string NextName) {
 	if ( (this->Nama == "Ember") && (NextName == "Blaze") ) {
 		Nama = "Blaze";
