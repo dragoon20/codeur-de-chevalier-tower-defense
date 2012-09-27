@@ -84,6 +84,7 @@ void ShowMenu()
 	}
 }
 
+
 /* ---- Bagian Menu Utama ---- */
 
 
@@ -144,6 +145,33 @@ MenuItem GetMenuResponse(sf::RenderWindow& window)
 	}
 }
 
+void getPath(int x, int y, int path_idx) {
+	if ((_field.node[x][y-1].getProperties() == 'O') && ((y-1) >=0)) { //atas 
+		path[path_idx + 1] = 0;
+		getPath(x, y-1, path_idx+1);
+		break;
+	}
+	if ((_field.node[x+1][y].getProperties() == 'O') && ((x+1) < 50)) { //bawah
+		path[path_idx + 1] = 1;
+		getPath(x+1, y, path_idx+1);
+		break;
+	}
+	if ((_field.node[x][y+1].getProperties() == 'O') && ((y+1) < 50)) { //kanan 
+		path[path_idx + 1] = 2;
+		getPath(x, y+1, path_idx+1);
+		break;
+	}
+	if ((_field.node[x-1][y].getProperties() == 'O') && ((x-1) >=0)) { //kiri
+		path[path_idx + 1] = 3;
+		getPath(x-1, y, path_idx+1);
+		break;
+	}
+}
+_field.findStartNode();
+int startX = _field.getStartx();
+int startY = _field.getStarty();
+
+
 /* ---- Bagian Persiapan ---- */
 
 /* Program Utama */
@@ -160,7 +188,7 @@ int main()
 	int playergold = 10;
 	Enemy * listmusuh = getEnemylist();
 	Tower * listtower = getTowerList();
-	
+
 	musuh.push_back(listmusuh[0]);
 	musuh.push_back(listmusuh[1]);
 	musuh.push_back(listmusuh[2]);
