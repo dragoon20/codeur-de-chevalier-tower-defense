@@ -369,9 +369,9 @@ int main()
 									playergold += musuh[j].getReward();
 									tower[i].setTarget(-1);
 									cout << "Monster " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << " tewas" << endl;
-									musuh[j].setX(-1);
+									/*musuh[j].setX(-1);
 									musuh[j].setY(4);
-									musuh[j].setPos(j*-1-1);
+									musuh[j].setPos(j*-1-1);*/
 								}
 							}
 							else
@@ -393,9 +393,9 @@ int main()
 											playergold += musuh[j].getReward();
 											tower[i].setTarget(-1);
 											cout << "Monster " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << " tewas" << endl;
-											musuh[j].setX(-1);
+											/*musuh[j].setX(-1);
 											musuh[j].setY(4);
-											musuh[j].setPos(j*-1-1);
+											musuh[j].setPos(j*-1-1);*/
 										}
 									
 										cekmusuh = false;
@@ -434,6 +434,20 @@ int main()
 								
 								
 								cout << musuh[j].getName() << " " << j+1 << " bergerak ke titik (" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
+								/**draw enemy**/
+								if (musuh[j].getName()=="Lizardman"){
+									_spriteEnemy.SetSubRect(sf::IntRect(0, 0, 64, 64));
+								} else if (musuh[j].getName()=="Salamander"){
+									_spriteEnemy.SetSubRect(sf::IntRect(64, 0, 128, 64));
+								} else if (musuh[j].getName()=="Mandragora"){
+									_spriteEnemy.SetSubRect(sf::IntRect(128, 0, 192, 64));
+								} else if (musuh[j].getName()=="Undine"){
+									_spriteEnemy.SetSubRect(sf::IntRect(0, 64, 64, 128));
+								} else if (musuh[j].getName()=="Efreet"){
+									_spriteEnemy.SetSubRect(sf::IntRect(64, 64, 128, 128));
+								} else if (musuh[j].getName()=="Dryad"){
+									_spriteEnemy.SetSubRect(sf::IntRect(128, 64, 192, 128));
+								}
 								_spriteEnemy.SetPosition(musuh[j].getX()*64, musuh[j].getY()*64);
 								_mainWindow.Draw(_spriteEnemy);
 								
@@ -457,27 +471,50 @@ int main()
 								_mainWindow.Draw(_spriteTower);
 							}
 							
-								for (int j=0;j<musuh.size();++j){
+							for (int j=0;j<musuh.size();++j)
+							{								
+								if (musuh[j].getaHealth()>0)
+								{
+									// pilih gambar
+									if (musuh[j].getName()=="Lizardman"){
+										_spriteEnemy.SetSubRect(sf::IntRect(0, 0, 64, 64));
+									} else if (musuh[j].getName()=="Salamander"){
+										_spriteEnemy.SetSubRect(sf::IntRect(64, 0, 128, 64));
+									} else if (musuh[j].getName()=="Mandragora"){
+										_spriteEnemy.SetSubRect(sf::IntRect(128, 0, 192, 64));
+									} else if (musuh[j].getName()=="Undine"){
+										_spriteEnemy.SetSubRect(sf::IntRect(0, 64, 64, 128));
+									} else if (musuh[j].getName()=="Efreet"){
+										_spriteEnemy.SetSubRect(sf::IntRect(64, 64, 128, 128));
+									} else if (musuh[j].getName()=="Dryad"){
+										_spriteEnemy.SetSubRect(sf::IntRect(128, 64, 192, 128));
+									}
+
 									if ((musuh[j].getPos() > 0) && (musuh[j].getPos() < pathsize)){
 										if (path[musuh[j].getPos()]==0){
+											_spriteEnemy.SetRotation(0.0f);
 											_spriteEnemy.SetPosition((musuh[j].getX())*64, (musuh[j].getY())*64-a);
 											_mainWindow.Draw(_spriteEnemy);
 										} else 
 										if (path[musuh[j].getPos()]==1){			
+											_spriteEnemy.SetRotation(90.0f);
 											_spriteEnemy.SetPosition((musuh[j].getX())*64+a, (musuh[j].getY())*64);
 											_mainWindow.Draw(_spriteEnemy);
 										} else
-										if (path[musuh[j].getPos()]==2){			
+										if (path[musuh[j].getPos()]==2){
+											_spriteEnemy.SetRotation(180.0f);
 											_spriteEnemy.SetPosition((musuh[j].getX())*64, (musuh[j].getY())*64+a);
 											_mainWindow.Draw(_spriteEnemy);
 										} else
-										if (path[musuh[j].getPos()]==3){			
+										if (path[musuh[j].getPos()]==3){
+											_spriteEnemy.SetRotation(270.0f);
 											_spriteEnemy.SetPosition((musuh[j].getX())*64-a, (musuh[j].getY())*64);
 											_mainWindow.Draw(_spriteEnemy);
 										} else {
 									
 										}
-									}								
+									}
+								}								
 							}
 							
 							_mainWindow.Draw(_spriteButtonStart);
