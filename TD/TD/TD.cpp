@@ -171,9 +171,12 @@ int main()
 	_imageTower.LoadFromFile("images/tower.png");
 	_spriteTower.SetImage(_imageTower);
 
-	_imageEnemy.LoadFromFile("images/enemy.png");
+	_imageEnemy.LoadFromFile("images/aliens.png");
 	_spriteEnemy.SetImage(_imageEnemy);
-
+	int c = 0; 
+	int r = 0;
+	bool facingRight = false;
+	 
 	//button
 	_imageButtonStart.LoadFromFile("images/start.png");
 	_spriteButtonStart.SetImage(_imageButtonStart);
@@ -435,20 +438,29 @@ int main()
 								
 								cout << musuh[j].getName() << " " << j+1 << " bergerak ke titik (" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
 								/**draw enemy**/
+								c++;
+								if (c > 5) c = 0; 
 								if (musuh[j].getName()=="Lizardman"){
-									_spriteEnemy.SetSubRect(sf::IntRect(0, 0, 64, 64));
+									r = 0;
+									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 								} else if (musuh[j].getName()=="Salamander"){
-									_spriteEnemy.SetSubRect(sf::IntRect(64, 0, 128, 64));
+									r = 1;
+									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 								} else if (musuh[j].getName()=="Mandragora"){
-									_spriteEnemy.SetSubRect(sf::IntRect(128, 0, 192, 64));
+									r = 2;
+									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 								} else if (musuh[j].getName()=="Undine"){
-									_spriteEnemy.SetSubRect(sf::IntRect(0, 64, 64, 128));
+									r = 0;
+									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 								} else if (musuh[j].getName()=="Efreet"){
-									_spriteEnemy.SetSubRect(sf::IntRect(64, 64, 128, 128));
+									r = 1;
+									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 								} else if (musuh[j].getName()=="Dryad"){
-									_spriteEnemy.SetSubRect(sf::IntRect(128, 64, 192, 128));
+									r = 2;
+									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 								}
-								_spriteEnemy.SetPosition(musuh[j].getX()*64, musuh[j].getY()*64);
+								
+								_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64);
 								_mainWindow.Draw(_spriteEnemy);
 								
 							}
@@ -476,39 +488,52 @@ int main()
 								if (musuh[j].getaHealth()>0)
 								{
 									// pilih gambar
+									if (l == 10){c++;}
+									if (c > 5) c = 0; 
 									if (musuh[j].getName()=="Lizardman"){
-										_spriteEnemy.SetSubRect(sf::IntRect(0, 0, 64, 64));
+										r = 0;
+										_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 									} else if (musuh[j].getName()=="Salamander"){
-										_spriteEnemy.SetSubRect(sf::IntRect(64, 0, 128, 64));
+										r = 1;
+										_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 									} else if (musuh[j].getName()=="Mandragora"){
-										_spriteEnemy.SetSubRect(sf::IntRect(128, 0, 192, 64));
+										r = 2;
+										_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 									} else if (musuh[j].getName()=="Undine"){
-										_spriteEnemy.SetSubRect(sf::IntRect(0, 64, 64, 128));
+										r = 0;
+										_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 									} else if (musuh[j].getName()=="Efreet"){
-										_spriteEnemy.SetSubRect(sf::IntRect(64, 64, 128, 128));
+										r = 1;
+										_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 									} else if (musuh[j].getName()=="Dryad"){
-										_spriteEnemy.SetSubRect(sf::IntRect(128, 64, 192, 128));
+										r = 2;
+										_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 									}
-
 									if ((musuh[j].getPos() > 0) && (musuh[j].getPos() < pathsize)){
-										if (path[musuh[j].getPos()]==0){
-											_spriteEnemy.SetRotation(0.0f);
-											_spriteEnemy.SetPosition((musuh[j].getX())*64, (musuh[j].getY())*64-a);
+										if (path[musuh[j].getPos()]==0){ //ke atas
+											_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64-a);
 											_mainWindow.Draw(_spriteEnemy);
 										} else 
-										if (path[musuh[j].getPos()]==1){			
-											_spriteEnemy.SetRotation(90.0f);
-											_spriteEnemy.SetPosition((musuh[j].getX())*64+a, (musuh[j].getY())*64);
+										if (path[musuh[j].getPos()]==1){ //ke kanan			
+											if (facingRight == false)
+											{
+												_spriteEnemy.FlipX(true);
+												facingRight = true;
+											} 
+											_spriteEnemy.SetPosition(musuh[j].getX()*64+3+a, musuh[j].getY()*64);
 											_mainWindow.Draw(_spriteEnemy);
 										} else
-										if (path[musuh[j].getPos()]==2){
-											_spriteEnemy.SetRotation(180.0f);
-											_spriteEnemy.SetPosition((musuh[j].getX())*64, (musuh[j].getY())*64+a);
+										if (path[musuh[j].getPos()]==2){ //ke bawah
+											_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64+a);
 											_mainWindow.Draw(_spriteEnemy);
 										} else
-										if (path[musuh[j].getPos()]==3){
-											_spriteEnemy.SetRotation(270.0f);
-											_spriteEnemy.SetPosition((musuh[j].getX())*64-a, (musuh[j].getY())*64);
+										if (path[musuh[j].getPos()]==3){ //ke kiri
+											if (facingRight == true)
+											{
+												_spriteEnemy.FlipX(true);
+												facingRight = false;
+											} 
+											_spriteEnemy.SetPosition(musuh[j].getX()*64+3-a, musuh[j].getY()*64);
 											_mainWindow.Draw(_spriteEnemy);
 										} else {
 									
