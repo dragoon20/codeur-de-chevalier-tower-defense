@@ -293,20 +293,20 @@ int main()
 				tEnemyM.SetPosition(16*64+20,150);
 				kata2.push_back(tEnemyM);
 
-					//Bikin tombol-tombol menu
-					MenuItem startButton;
-					startButton.rect.Top= 10;
-					startButton.rect.Bottom = 48;
-					startButton.rect.Left = 16*64+20;
-					startButton.rect.Right = 16*64+173;
-					startButton.action = Start;
-					_menuItems.push_back(startButton);
+				//Bikin tombol-tombol menu
+				MenuItem startButton;
+				startButton.rect.Top= 10;
+				startButton.rect.Bottom = 48;
+				startButton.rect.Left = 16*64+20;
+				startButton.rect.Right = 16*64+173;
+				startButton.action = Start;
+				_menuItems.push_back(startButton);
 					
 				MenuItem exitButton;
-				exitButton.rect.Top= 145;
-				exitButton.rect.Bottom = 380;
-				exitButton.rect.Left = 0;
-				exitButton.rect.Right = 1023;
+				exitButton.rect.Top= 65;
+				exitButton.rect.Bottom = 102;
+				exitButton.rect.Left = 16*64+20;
+				exitButton.rect.Right = 16*64+173;
 				exitButton.action = Exit;
 				_menuItems.push_back(exitButton);
 
