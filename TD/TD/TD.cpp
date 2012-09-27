@@ -50,6 +50,9 @@ static sf::Sprite	_spriteTile;
 static sf::Image	_imageButtonStart;
 static sf::Sprite	_spriteButtonStart;
 
+static sf::Image	_imageButtonExit;
+static sf::Sprite	_spriteButtonExit;
+
 bool IsExiting()
 {
   if(_gameState == Exiting) 
@@ -145,6 +148,7 @@ MenuItem GetMenuResponse(sf::RenderWindow& window)
 	}
 }
 
+/*
 void getPath(int x, int y, int path_idx) {
 	if ((_field.node[x][y-1].getProperties() == 'O') && ((y-1) >=0)) { //atas 
 		path[path_idx + 1] = 0;
@@ -170,7 +174,7 @@ void getPath(int x, int y, int path_idx) {
 _field.findStartNode();
 int startX = _field.getStartx();
 int startY = _field.getStarty();
-
+*/
 
 /* ---- Bagian Persiapan ---- */
 
@@ -222,10 +226,13 @@ int main()
 	bool facingRight = false;
 	 
 	//button
-	_imageButtonStart.LoadFromFile("images/start.png");
+	_imageButtonStart.LoadFromFile("images/button_start.png");
 	_spriteButtonStart.SetImage(_imageButtonStart);
 	_spriteButtonStart.SetPosition(16*64+20, 10);
 
+	_imageButtonExit.LoadFromFile("images/button_exit.png");
+	_spriteButtonExit.SetImage(_imageButtonExit);
+	_spriteButtonExit.SetPosition(16*64+20, 65);
 
 	_gameState = ShowingMenu;
   
@@ -267,6 +274,7 @@ int main()
 				}
 
 				_mainWindow.Draw(_spriteButtonStart);
+				_mainWindow.Draw(_spriteButtonExit);
 
 				cekpersiapan = true;
 
@@ -515,6 +523,7 @@ int main()
 							_mainWindow.Draw(kata2[i]);
 						}
 						_mainWindow.Draw(_spriteButtonStart);
+						_mainWindow.Draw(_spriteButtonExit);
 
 						bool cektemp = true;
 						bool cektemp2 = true;
@@ -674,6 +683,7 @@ int main()
 							}
 							
 							_mainWindow.Draw(_spriteButtonStart);
+							_mainWindow.Draw(_spriteButtonExit);
 							
 							convert.str("");
 							convert << enemygold;
