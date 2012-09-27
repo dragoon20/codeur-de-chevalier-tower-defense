@@ -19,7 +19,7 @@ using namespace std;
 
 /* ---- Bagian Menu Utama ---- */
 
-const static int SCREEN_WIDTH = 1024;
+const static int SCREEN_WIDTH = 1216;
 const static int SCREEN_HEIGHT = 768;
 
 enum GameState { Uninitialized, ShowingSplash, Paused, 
@@ -39,6 +39,9 @@ static sf::Sprite	_spriteEnemy;
 
 static sf::Image	_imageTile;
 static sf::Sprite	_spriteTile;
+
+static sf::Image	_imageButtonStart;
+static sf::Sprite	_spriteButtonStart;
 
 bool IsExiting()
 {
@@ -162,7 +165,7 @@ int main()
 		return 0;
 
 	_mainWindow.Create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32),"La tour de défense");
-	_mainWindow.SetFramerateLimit(1);
+	_mainWindow.SetFramerateLimit(60);
 	_field.Load("example.txt");
 	
 	_imageTower.LoadFromFile("images/tower.png");
@@ -171,9 +174,11 @@ int main()
 	_imageEnemy.LoadFromFile("images/enemy.png");
 	_spriteEnemy.SetImage(_imageEnemy);
 
-	_imageTile.LoadFromFile("images/Terrain.png");
-	_spriteTile.SetImage(_imageTile);
-	_spriteTile.SetSubRect(sf::IntRect(64, 0, 128, 64));
+	//button
+	_imageButtonStart.LoadFromFile("images/start.png");
+	_spriteButtonStart.SetImage(_imageButtonStart);
+	_spriteButtonStart.SetPosition(16*64+10, 10);
+
 
 	_gameState = ShowingSplash;
   
@@ -181,6 +186,8 @@ int main()
 	{
 		sf::Event currentEvent;
 		_mainWindow.GetEvent(currentEvent);
+
+		
   
 		switch(_gameState)
 		{
@@ -202,22 +209,14 @@ int main()
 					_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
 					_mainWindow.Draw(_spriteTower);
 				}
-				/*for (int i=0;i<musuh.size();++i){
-					if (musuh[i].getaHealth() <= 0){
-						cout << "DRAW!" <<endl;
-						_spriteEnemy.SetPosition(musuh[i].getX()*64, musuh[i].getY()*64);
-						_mainWindow.Draw(_spriteEnemy);
-					}
-					else {
-						cout << "DI LUAR DRAW!" <<endl;
-					}
-				}*/
-		  
-				_gameObjectManager.UpdateAll();
-				_gameObjectManager.DrawAll(_mainWindow);
-		  
-				if(currentEvent.Type == sf::Event::Closed) _gameState = Exiting;
 
+				_mainWindow.Draw(_spriteButtonStart);
+		  
+				//_gameObjectManager.UpdateAll();
+				//_gameObjectManager.DrawAll(_mainWindow);
+		  
+				
+				if(currentEvent.Type == sf::Event::Closed) {_gameState = Exiting;}
 				/*if(currentEvent.Type == sf::Event::KeyPressed)
 				{
 					if(currentEvent.Key.Code == sf::Key::Escape) ShowMenu();
@@ -230,10 +229,10 @@ int main()
 				{
 					//Bikin tombol-tombol menu
 					MenuItem startButton;
-					startButton.rect.Top= 145;
-					startButton.rect.Bottom = 380;
-					startButton.rect.Left = 0;
-					startButton.rect.Right = 1023;
+					startButton.rect.Top= 0;
+					startButton.rect.Bottom = 38;
+					startButton.rect.Left = 16*64;
+					startButton.rect.Right = 16*64+153;
 					startButton.action = Start;
 					_menuItems.push_back(startButton);
 					
@@ -320,6 +319,8 @@ int main()
 				
 				if (_gameState==Playing)
 				{
+					_spriteButtonStart.SetColor(sf::Color(255, 255, 255, 128));
+					
 					// greedy musuh di sini
 					// berdasarkan kondisi dari field saat ini
 			
@@ -368,10 +369,14 @@ int main()
 									playergold += musuh[j].getReward();
 									tower[i].setTarget(-1);
 									cout << "Monster " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << " tewas" << endl;
+									musuh[j].setX(-1);
+									musuh[j].setY(4);
+									musuh[j].setPos(j*-1-1);
 								}
 							}
 							else
 							{
+								
 								while ((cekmusuh)&&(j<musuh.size()))
 								{
 									if ((musuh[j].getaHealth()>0)&&(abs(tower[i].getX()-musuh[j].getX())+abs(tower[i].getY()-musuh[j].getY())<=tower[i].getRange()))
@@ -388,6 +393,9 @@ int main()
 											playergold += musuh[j].getReward();
 											tower[i].setTarget(-1);
 											cout << "Monster " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << " tewas" << endl;
+											musuh[j].setX(-1);
+											musuh[j].setY(4);
+											musuh[j].setPos(j*-1-1);
 										}
 									
 										cekmusuh = false;
@@ -404,6 +412,7 @@ int main()
 							_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
 							_mainWindow.Draw(_spriteTower);
 						}
+						_mainWindow.Draw(_spriteButtonStart);
 
 						bool cektemp = true;
 						bool cektemp2 = true;
@@ -417,33 +426,72 @@ int main()
 							if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>=0)&&(musuh[j].getPos()<=pathsize))
 							{
 								cektemp2 = false;
-								_spriteTile.SetPosition(musuh[j].getX()*64, musuh[j].getY()*64);
+								
 								for (int k=0;k<musuh[j].getaSpeed();++k)
 								{
 									musuh[j].move(path[musuh[j].getPos()+k]);								
-								}						
+								}
+								
+								
 								cout << musuh[j].getName() << " " << j+1 << " bergerak ke titik (" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
 								_spriteEnemy.SetPosition(musuh[j].getX()*64, musuh[j].getY()*64);
 								_mainWindow.Draw(_spriteEnemy);
-								_mainWindow.Draw(_spriteTile);
+								
 							}
 							else if (musuh[j].getPos()<0)
 							{
 								cektemp2 = false;
 							}
 							
-							if (musuh[j].getaHealth()>0)
+							if (musuh[j].getaHealth()>0){}
 								musuh[j].setPos(musuh[j].getPos()+musuh[j].getaSpeed());
 							++j;
 						}
 						_mainWindow.Display();
-						for (int l=0;l<50000000;l++);
+						float a = 0;
+						for (int l=0;l<20;l++){
+							_mainWindow.Clear();
+							_field.Draw(_mainWindow);
+							for (int i=0;i<tower.size();++i){
+								_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
+								_mainWindow.Draw(_spriteTower);
+							}
+							
+								for (int j=0;j<musuh.size();++j){
+									if ((musuh[j].getPos() > 0) && (musuh[j].getPos() < pathsize)){
+										if (path[musuh[j].getPos()]==0){
+											_spriteEnemy.SetPosition((musuh[j].getX())*64, (musuh[j].getY())*64-a);
+											_mainWindow.Draw(_spriteEnemy);
+										} else 
+										if (path[musuh[j].getPos()]==1){			
+											_spriteEnemy.SetPosition((musuh[j].getX())*64+a, (musuh[j].getY())*64);
+											_mainWindow.Draw(_spriteEnemy);
+										} else
+										if (path[musuh[j].getPos()]==2){			
+											_spriteEnemy.SetPosition((musuh[j].getX())*64, (musuh[j].getY())*64+a);
+											_mainWindow.Draw(_spriteEnemy);
+										} else
+										if (path[musuh[j].getPos()]==3){			
+											_spriteEnemy.SetPosition((musuh[j].getX())*64-a, (musuh[j].getY())*64);
+											_mainWindow.Draw(_spriteEnemy);
+										} else {
+									
+										}
+									}								
+							}
+							
+							_mainWindow.Draw(_spriteButtonStart);
+							_mainWindow.Display();
+							a += 64/20;
+
+						}
 						if ((cektemp)||(cektemp2)) // kondisi wave berhenti
 						{
 							cekwave = false;
 						}
 					}
 					// next wave
+					_spriteButtonStart.SetColor(sf::Color(255, 255, 255, 255));
 				}
 				break;	
 			}
