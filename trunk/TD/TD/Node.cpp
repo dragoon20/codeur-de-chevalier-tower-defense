@@ -15,3 +15,9 @@
 	char Node::getProperties(){
 		return _properties;
 	}
+
+	Node& Node::operator= (const Node& N) {
+		_properties = N._properties;
+		Node(_properties);
+		return *this;
+	}
