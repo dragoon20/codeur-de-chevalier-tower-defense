@@ -18,6 +18,12 @@ class Field
 		Node node[50][50];
 		Node Start;
 		Node Finish;
+
+		int start_x; 
+		int start_y;
+		int finish_x;
+		int finish_y;
+
 		sf::Image _image;
 		sf::Sprite _sprite;
 	public :
@@ -28,9 +34,21 @@ class Field
 		void setHeight(int h);
 		int getWidth();
 		int getHeight(); 
-	
+		
+		void setStartx(int);
+		void setStarty(int);
+		void setFinishx(int);
+		void setFinishy(int);
+		int getStartx();
+		int getStarty();
+		int getFinishx();
+		int getFinishy();
+
 		void Load(string inputfile);
 		void Draw(sf::RenderWindow & renderWindow);
+
+		void findStartNode();
+		void findFinishNode();
 };
 
 #endif

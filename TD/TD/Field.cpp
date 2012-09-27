@@ -33,6 +33,82 @@
 	int Field::getHeight(){
 		return height;
 	}
+
+	void Field::setStartx(int s) {
+		start_x = s;
+	}
+	void Field::setStarty(int s) {
+		start_y = s;
+	}
+	void Field::setFinishx(int f) {
+		finish_x = f;
+	}
+	void Field::setFinishy(int f) {
+		finish_y = f;
+	}
+	int Field::getStartx() {
+		return start_x;
+	}
+	int Field::getStarty() {
+		return start_y;
+	}
+	int Field::getFinishx() {
+		return finish_x;
+	}
+	int Field::getFinishy() {
+		return finish_y;
+	}
+
+	void Field::findStartNode() {
+		bool found = false;
+		/* cari di kolom kiri */ 
+		for (int i=0; i<50; i++){
+			if (node[i][0].getProperties() == 'O') {
+				setStartx(i);
+				setStarty(0);
+				found = true;
+				break;
+			}
+		}
+		/* cari di baris bawah */
+		if (!found) {
+			for (int i=0; i<50; i++){
+				if (node[49][i].getProperties() == 'O') {
+					setStartx(49);
+					setStarty(i);
+					found = true;
+					break;
+				}
+			}
+		}
+		/* cari di kolom kanan */
+		if (!found) {
+			for (int i=0; i<50; i++){
+				if (node[i][49].getProperties() == 'O') {
+					setStartx(i);
+					setStarty(49);
+					found = true;
+					break;
+				}
+			}
+		}
+		/* cari di baris atas */
+		if (!found) {
+			for (int i=0; i<50; i++){
+				if (node[0][i].getProperties() == 'O') {
+					setStartx(0);
+					setStarty(i);
+					found = true;
+					break;
+				}
+			}
+		}
+	}
+
+	void Field::findFinishNode() {
+		/* perlu ga ya? */
+	}
+
 	/*Node Field::getNode(int i, int j){
 		return node[i][j];
 	}

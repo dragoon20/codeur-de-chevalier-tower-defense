@@ -10,7 +10,7 @@ public :
 	~Node();
 	void setProperties(char c);
 	char getProperties();
-
+	Node& operator= (const Node&);
 };
 
 #endif
