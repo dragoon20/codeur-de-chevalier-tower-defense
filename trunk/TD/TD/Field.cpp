@@ -105,8 +105,30 @@
 		}
 	}
 
+	void Field::getPath(int x, int y, int path_idx,int* path) {
+		if ((node[x][y-1].getProperties() == 'O') && ((y-1) >=0) && (path[path_idx] != 2)) { //atas 
+			path[path_idx + 1] = 0;
+			getPath(x, y-1, path_idx+1, path);
+		}
+		else
+		if ((node[x+1][y].getProperties() == 'O') && ((x+1) < 50) && (path[path_idx] != 3)) { //kanan
+			path[path_idx + 1] = 1;
+			getPath(x+1, y, path_idx+1, path);
+		}
+		else
+		if ((node[x][y+1].getProperties() == 'O') && ((y+1) < 50) && (path[path_idx] != 0)) { //bawah 
+			path[path_idx + 1] = 2;
+			getPath(x, y+1, path_idx+1, path);
+		}
+		else
+		if ((node[x-1][y].getProperties() == 'O') && ((x-1) >=0) && (path[path_idx] != 1)) { //kiri
+			path[path_idx + 1] = 3; 
+			getPath(x-1, y, path_idx+1, path);
+		}
+	}
+
 	void Field::findFinishNode() {
-		/* perlu ga ya? */
+		/* perlu ga ya? kyknya ngak */
 	}
 
 	/*Node Field::getNode(int i, int j){
