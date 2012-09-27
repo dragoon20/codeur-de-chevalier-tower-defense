@@ -263,14 +263,14 @@ int main()
 				tPlayerM.SetText("Player Money: ");
 				tPlayerM.SetSize(20);
 				tPlayerM.SetColor(sf::Color(255,255,255));
-				tPlayerM.SetPosition(16*64+20,100);
+				tPlayerM.SetPosition(16*64+20,155);
 				kata2.push_back(tPlayerM);
 
 				sf::String tEnemyM ;
 				tEnemyM.SetText("Enemy Money: ");
 				tEnemyM.SetSize(20);
 				tEnemyM.SetColor(sf::Color(255,255,255));
-				tEnemyM.SetPosition(16*64+20,150);
+				tEnemyM.SetPosition(16*64+20,205);
 				kata2.push_back(tEnemyM);
 
 				//Bikin tombol-tombol menu
@@ -325,7 +325,7 @@ int main()
 				tMoneyE.SetText(convert.str());
 				tMoneyE.SetSize(20);
 				tMoneyE.SetColor(sf::Color(255,255,255));
-				tMoneyE.SetPosition(16*64+20,175);
+				tMoneyE.SetPosition(16*64+40,230);
 				_mainWindow.Draw(tMoneyE);
 
 				convert.str("");
@@ -335,7 +335,7 @@ int main()
 				tMoneyP.SetText(convert.str());
 				tMoneyP.SetSize(20);
 				tMoneyP.SetColor(sf::Color(255,255,255));
-				tMoneyP.SetPosition(16*64+20,125);
+				tMoneyP.SetPosition(16*64+40,180);
 				_mainWindow.Draw(tMoneyP);
 
 				for (int i=0;i<kata2.size();++i)
