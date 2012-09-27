@@ -32,8 +32,14 @@ static sf::RenderWindow _mainWindow;
 static GameObjectManager _gameObjectManager;
 static Field _field;
 
-static sf::Image	_imageTower;
-static sf::Sprite	_spriteTower;
+//static sf::Image	_imageTower;
+//static sf::Sprite	_spriteTower;
+static sf::Image	_imageTowerBlue;
+static sf::Image	_imageTowerRed;
+static sf::Image	_imageTowerGreen;
+static sf::Sprite	_spriteTowerBlue;
+static sf::Sprite	_spriteTowerRed;
+static sf::Sprite	_spriteTowerGreen;
 
 static sf::Image	_imageEnemy;
 static sf::Sprite	_spriteEnemy;
@@ -172,9 +178,15 @@ int main()
 	_mainWindow.SetFramerateLimit(60);
 	_field.Load("example.txt");
 	
-	_imageTower.LoadFromFile("images/tower.png");
-	_spriteTower.SetImage(_imageTower);
-
+	//_imageTower.LoadFromFile("images/tower.png");
+	//_spriteTower.SetImage(_imageTower);
+	_imageTowerBlue.LoadFromFile("images/tower_blue.png");
+	_imageTowerRed.LoadFromFile("images/tower_red.png");
+	_imageTowerGreen.LoadFromFile("images/tower_green.png");
+	_spriteTowerBlue.SetImage(_imageTowerBlue);
+	_spriteTowerRed.SetImage(_imageTowerRed);
+	_spriteTowerGreen.SetImage(_imageTowerGreen);
+	
 	_imageEnemy.LoadFromFile("images/aliens.png");
 	_spriteEnemy.SetImage(_imageEnemy);
 	int c = 0; 
@@ -208,8 +220,22 @@ int main()
 				_mainWindow.Clear();
 				_field.Draw(_mainWindow);
 				for (int i=0;i<tower.size();++i){
-					_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
-					_mainWindow.Draw(_spriteTower);
+					if (tower[i].getNama()=="Splash"){
+						_spriteTowerBlue.SetSubRect(sf::IntRect(0, 0, 64, 64));
+						_spriteTowerBlue.SetCenter(32, 32);
+						_spriteTowerBlue.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+						_mainWindow.Draw(_spriteTowerBlue);
+					} else if (tower[i].getNama()=="Ember"){
+						_spriteTowerRed.SetSubRect(sf::IntRect(0, 0, 64, 64));
+						_spriteTowerRed.SetCenter(32, 32);
+						_spriteTowerRed.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+						_mainWindow.Draw(_spriteTowerRed);
+					} else if (tower[i].getNama()=="Sprout"){
+						_spriteTowerGreen.SetSubRect(sf::IntRect(0, 0, 64, 64));
+						_spriteTowerGreen.SetCenter(32, 32);
+						_spriteTowerGreen.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+						_mainWindow.Draw(_spriteTowerGreen);
+					}
 				}
 
 				_mainWindow.Draw(_spriteButtonStart);
@@ -439,8 +465,22 @@ int main()
 						_mainWindow.Clear();
 						_field.Draw(_mainWindow);
 						for (int i=0;i<tower.size();++i){
-							_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
-							_mainWindow.Draw(_spriteTower);
+							if (tower[i].getNama()=="Splash"){
+								_spriteTowerBlue.SetSubRect(sf::IntRect(0, 0, 64, 64));
+								_spriteTowerBlue.SetCenter(32, 32);
+								_spriteTowerBlue.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+								_mainWindow.Draw(_spriteTowerBlue);
+							} else if (tower[i].getNama()=="Ember"){
+								_spriteTowerRed.SetSubRect(sf::IntRect(0, 0, 64, 64));
+								_spriteTowerRed.SetCenter(32, 32);
+								_spriteTowerRed.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+								_mainWindow.Draw(_spriteTowerRed);
+							} else if (tower[i].getNama()=="Sprout"){
+								_spriteTowerGreen.SetSubRect(sf::IntRect(0, 0, 64, 64));
+								_spriteTowerGreen.SetCenter(32, 32);
+								_spriteTowerGreen.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+								_mainWindow.Draw(_spriteTowerGreen);
+							}
 						}
 						for (int i=0;i<kata2.size();++i)
 						{
@@ -524,8 +564,22 @@ int main()
 							_mainWindow.Clear();
 							_field.Draw(_mainWindow);
 							for (int i=0;i<tower.size();++i){
-								_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
-								_mainWindow.Draw(_spriteTower);
+								if (tower[i].getNama()=="Splash"){
+									_spriteTowerBlue.SetSubRect(sf::IntRect(0, 0, 64, 64));
+									_spriteTowerBlue.SetCenter(32, 32);
+									_spriteTowerBlue.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+									_mainWindow.Draw(_spriteTowerBlue);
+								} else if (tower[i].getNama()=="Ember"){
+									_spriteTowerRed.SetSubRect(sf::IntRect(0, 0, 64, 64));
+									_spriteTowerRed.SetCenter(32, 32);
+									_spriteTowerRed.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+									_mainWindow.Draw(_spriteTowerRed);
+								} else if (tower[i].getNama()=="Sprout"){
+									_spriteTowerGreen.SetSubRect(sf::IntRect(0, 0, 64, 64));
+									_spriteTowerGreen.SetCenter(32, 32);
+									_spriteTowerGreen.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+									_mainWindow.Draw(_spriteTowerGreen);
+								}
 							}
 							for (int i=0;i<kata2.size();++i)
 							{
