@@ -15,15 +15,16 @@
 #include <cmath>
 #include <string>
 #include <vector>
+#include <sstream>
 using namespace std;
 
 /* ---- Bagian Menu Utama ---- */
 
 const static int SCREEN_WIDTH = 1216;
-const static int SCREEN_HEIGHT = 768;
+const static int SCREEN_HEIGHT = 640;
 
 enum GameState { Uninitialized, ShowingSplash, Paused, 
-        ShowingMenu, Playing, Exiting };
+        ShowingMenu, Playing1, Playing2, Exiting };
   
 static GameState _gameState;
 static sf::RenderWindow _mainWindow;
@@ -67,9 +68,13 @@ void ShowMenu()
 		case MainMenu::Exit:
 			_gameState = Exiting;
 			break;
-		case MainMenu::Play:
-			_gameState = Playing;
+		case MainMenu::Play1:
+			_gameState = Playing1;
 			break;
+		case MainMenu::Play2:
+			_gameState = Playing2;
+			break;
+		default:break;
 	}
 }
 
@@ -142,6 +147,8 @@ int main()
 	// variabel
 	vector<Enemy> musuh;
 	vector<Tower> tower;
+	vector<sf::String> kata2;
+
 	Field field;
 	int enemygold = 10;
 	int playergold = 10;
@@ -157,9 +164,6 @@ int main()
 
 	bool cekpersiapan;
 	bool cekwave;
-	
-	int mode = 1; // mode player
-
 
 	if(_gameState != Uninitialized)
 		return 0;
@@ -180,10 +184,10 @@ int main()
 	//button
 	_imageButtonStart.LoadFromFile("images/start.png");
 	_spriteButtonStart.SetImage(_imageButtonStart);
-	_spriteButtonStart.SetPosition(16*64+10, 10);
+	_spriteButtonStart.SetPosition(16*64+20, 10);
 
 
-	_gameState = ShowingSplash;
+	_gameState = ShowingMenu;
   
 	while(!IsExiting())
 	{
@@ -199,14 +203,9 @@ int main()
 				ShowMenu();
 				break;
 			}
-			case ShowingSplash:
+			case Playing1:
 			{
-				ShowSplashScreen();
-				break;
-			}
-			case Playing:
-			{
-				_mainWindow.Clear(sf::Color(0,0,0));
+				_mainWindow.Clear();
 				_field.Draw(_mainWindow);
 				for (int i=0;i<tower.size();++i){
 					_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
@@ -214,113 +213,147 @@ int main()
 				}
 
 				_mainWindow.Draw(_spriteButtonStart);
-		  
-				//_gameObjectManager.UpdateAll();
-				//_gameObjectManager.DrawAll(_mainWindow);
-		  
-				
-				if(currentEvent.Type == sf::Event::Closed) {_gameState = Exiting;}
-				/*if(currentEvent.Type == sf::Event::KeyPressed)
-				{
-					if(currentEvent.Key.Code == sf::Key::Escape) ShowMenu();
-				}*/
-
-				_mainWindow.Display();
 
 				cekpersiapan = true;
-				while (cekpersiapan)
-				{
+
+				//Bikin text-text yang ingin ditampilkan
+				sf::String tPlayerM ;
+				tPlayerM.SetText("Player Money: ");
+				tPlayerM.SetSize(20);
+				tPlayerM.SetColor(sf::Color(255,255,255));
+				tPlayerM.SetPosition(16*64+20,100);
+				kata2.push_back(tPlayerM);
+
+				sf::String tEnemyM ;
+				tEnemyM.SetText("Enemy Money: ");
+				tEnemyM.SetSize(20);
+				tEnemyM.SetColor(sf::Color(255,255,255));
+				tEnemyM.SetPosition(16*64+20,150);
+				kata2.push_back(tEnemyM);
+
 					//Bikin tombol-tombol menu
 					MenuItem startButton;
-					startButton.rect.Top= 0;
-					startButton.rect.Bottom = 38;
-					startButton.rect.Left = 16*64;
-					startButton.rect.Right = 16*64+153;
+					startButton.rect.Top= 10;
+					startButton.rect.Bottom = 48;
+					startButton.rect.Left = 16*64+20;
+					startButton.rect.Right = 16*64+173;
 					startButton.action = Start;
 					_menuItems.push_back(startButton);
 					
-					MenuItem menuButton;
-					menuButton.rect.Top= 145;
-					menuButton.rect.Bottom = 380;
-					menuButton.rect.Left = 0;
-					menuButton.rect.Right = 1023;
-					menuButton.action = Menu;
-					_menuItems.push_back(menuButton);
+				MenuItem exitButton;
+				exitButton.rect.Top= 145;
+				exitButton.rect.Bottom = 380;
+				exitButton.rect.Left = 0;
+				exitButton.rect.Right = 1023;
+				exitButton.action = Exit;
+				_menuItems.push_back(exitButton);
 
-					MenuItem exitButton;
-					exitButton.rect.Top= 145;
-					exitButton.rect.Bottom = 380;
-					exitButton.rect.Left = 0;
-					exitButton.rect.Right = 1023;
-					exitButton.action = Exit;
-					_menuItems.push_back(exitButton);
+				MenuItem towerButton1;
+				towerButton1.rect.Top= 145;
+				towerButton1.rect.Bottom = 380;
+				towerButton1.rect.Left = 0;
+				towerButton1.rect.Right = 1023;
+				towerButton1.action = Build;
+				towerButton1.id = 1;
+				_menuItems.push_back(towerButton1);
 
-					MenuItem towerButton1;
-					towerButton1.rect.Top= 145;
-					towerButton1.rect.Bottom = 380;
-					towerButton1.rect.Left = 0;
-					towerButton1.rect.Right = 1023;
-					towerButton1.action = Build;
-					towerButton1.id = 1;
-					_menuItems.push_back(towerButton1);
+				MenuItem towerButton2;
+				towerButton2.rect.Top= 145;
+				towerButton2.rect.Bottom = 380;
+				towerButton2.rect.Left = 0;
+				towerButton2.rect.Right = 1023;
+				towerButton2.action = Build;
+				towerButton2.id = 2;
+				_menuItems.push_back(towerButton2);
 
-					MenuItem towerButton2;
-					towerButton2.rect.Top= 145;
-					towerButton2.rect.Bottom = 380;
-					towerButton2.rect.Left = 0;
-					towerButton2.rect.Right = 1023;
-					towerButton2.action = Build;
-					towerButton2.id = 2;
-					_menuItems.push_back(towerButton2);
+				MenuItem towerButton3;
+				towerButton3.rect.Top= 145;
+				towerButton3.rect.Bottom = 380;
+				towerButton3.rect.Left = 0;
+				towerButton3.rect.Right = 1023;
+				towerButton3.action = Build;
+				towerButton3.id = 3;
+				_menuItems.push_back(towerButton3);
 
-					MenuItem towerButton3;
-					towerButton3.rect.Top= 145;
-					towerButton3.rect.Bottom = 380;
-					towerButton3.rect.Left = 0;
-					towerButton3.rect.Right = 1023;
-					towerButton3.action = Build;
-					towerButton3.id = 3;
-					_menuItems.push_back(towerButton3);
+				stringstream convert;
 
-					MenuItem result = GetMenuResponse(_mainWindow);
-						
-					switch(result.action)
-					{
-						case Start:
-						{
-							cekpersiapan = false;
-							break;
-						}
-						case Menu:
-						{
-							_gameState = ShowingMenu;
-							break;
-						}
-						case Exit:
-						{
-							_gameState = Exiting;
-							break;
-						}
-						case Build:
-						{
-							// Bikin tower di sini berdasarkan id
-							switch(result.id)
-							{
-								default:break;
-							}
-							break;
-						}
-						case TowerUp:
-						{
-							// Upgrade tower berdasarkan id
-							break;
-						}
-						default:break;
-					}
-	
+				convert << enemygold;
+
+				sf::String tMoneyE;
+				tMoneyE.SetText(convert.str());
+				tMoneyE.SetSize(20);
+				tMoneyE.SetColor(sf::Color(255,255,255));
+				tMoneyE.SetPosition(16*64+20,125);
+				_mainWindow.Draw(tMoneyE);
+
+				convert.str("");
+				convert << playergold;
+
+				sf::String tMoneyP;
+				tMoneyP.SetText(convert.str());
+				tMoneyP.SetSize(20);
+				tMoneyP.SetColor(sf::Color(255,255,255));
+				tMoneyP.SetPosition(16*64+20,175);
+				_mainWindow.Draw(tMoneyP);
+
+				for (int i=0;i<kata2.size();++i)
+				{
+					_mainWindow.Draw(kata2[i]);
 				}
-				
-				if (_gameState==Playing)
+
+				_mainWindow.Display();
+
+				while (cekpersiapan)
+				{
+					_mainWindow.GetEvent(currentEvent);
+					if (currentEvent.Type == sf::Event::Closed)
+					{
+						_gameState = Exiting;
+						cekpersiapan = false;
+					}
+
+					if (_gameState==Playing1)
+					{
+						MenuItem result = GetMenuResponse(_mainWindow);
+						
+						switch(result.action)
+						{
+							case Start:
+							{
+								cekpersiapan = false;
+								break;
+							}
+							case Menu:
+							{
+								_gameState = ShowingMenu;
+								break;
+							}
+							case Exit:
+							{
+								_gameState = Exiting;
+								cekpersiapan = false;
+								break;
+							}
+							case Build:
+							{
+								// Bikin tower di sini berdasarkan id
+								switch(result.id)
+								{
+									default:break;
+								}
+								break;
+							}
+							case TowerUp:
+							{
+								// Upgrade tower berdasarkan id
+								break;
+							}
+							default:break;
+						}
+					}
+				}
+
+				if (_gameState==Playing1)
 				{
 					_spriteButtonStart.SetColor(sf::Color(255, 255, 255, 128));
 					
@@ -372,9 +405,6 @@ int main()
 									playergold += musuh[j].getReward();
 									tower[i].setTarget(-1);
 									cout << "Monster " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << " tewas" << endl;
-									/*musuh[j].setX(-1);
-									musuh[j].setY(4);
-									musuh[j].setPos(j*-1-1);*/
 								}
 							}
 							else
@@ -396,9 +426,6 @@ int main()
 											playergold += musuh[j].getReward();
 											tower[i].setTarget(-1);
 											cout << "Monster " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << " tewas" << endl;
-											/*musuh[j].setX(-1);
-											musuh[j].setY(4);
-											musuh[j].setPos(j*-1-1);*/
 										}
 									
 										cekmusuh = false;
@@ -415,6 +442,10 @@ int main()
 							_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
 							_mainWindow.Draw(_spriteTower);
 						}
+						for (int i=0;i<kata2.size();++i)
+						{
+							_mainWindow.Draw(kata2[i]);
+						}
 						_mainWindow.Draw(_spriteButtonStart);
 
 						bool cektemp = true;
@@ -426,7 +457,7 @@ int main()
 							if (musuh[j].getaHealth()>0)
 								cektemp = false;
 							// musuh bergerak
-							if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>=0)&&(musuh[j].getPos()<=pathsize))
+							if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>=0)&&(musuh[j].getPos()<pathsize))
 							{
 								cektemp2 = false;
 								
@@ -462,7 +493,6 @@ int main()
 								
 								_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64);
 								_mainWindow.Draw(_spriteEnemy);
-								
 							}
 							else if (musuh[j].getPos()<0)
 							{
@@ -473,7 +503,22 @@ int main()
 								musuh[j].setPos(musuh[j].getPos()+musuh[j].getaSpeed());
 							++j;
 						}
+
+						convert.str("");
+						convert << enemygold;
+
+						tMoneyE.SetText(convert.str());
+						_mainWindow.Draw(tMoneyE);
+
+						convert.str("");
+						convert << playergold;
+
+						tMoneyP.SetText(convert.str());
+						_mainWindow.Draw(tMoneyP);
+
 						_mainWindow.Display();
+
+
 						float a = 0;
 						for (int l=0;l<20;l++){
 							_mainWindow.Clear();
@@ -482,10 +527,14 @@ int main()
 								_spriteTower.SetPosition(tower[i].getX()*64, tower[i].getY()*64);
 								_mainWindow.Draw(_spriteTower);
 							}
+							for (int i=0;i<kata2.size();++i)
+							{
+								_mainWindow.Draw(kata2[i]);
+							}
 							
 							for (int j=0;j<musuh.size();++j)
 							{								
-								if (musuh[j].getaHealth()>0)
+								if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>=0)&&(musuh[j].getPos()<pathsize))
 								{
 									// pilih gambar
 									if (l == 10){c++;}
@@ -543,6 +592,19 @@ int main()
 							}
 							
 							_mainWindow.Draw(_spriteButtonStart);
+							
+							convert.str("");
+							convert << enemygold;
+
+							tMoneyE.SetText(convert.str());
+							_mainWindow.Draw(tMoneyE);
+
+							convert.str("");
+							convert << playergold;
+
+							tMoneyP.SetText(convert.str());
+							_mainWindow.Draw(tMoneyP);
+
 							_mainWindow.Display();
 							a += 64/20;
 

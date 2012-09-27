@@ -99,7 +99,7 @@ void Game::ShowMenu()
 	case MainMenu::Exit:
 		_gameState = Game::Exiting;
 		break;
-	case MainMenu::Play:
+	case MainMenu::Play1:
 		_gameState = Game::Playing;
 		break;
 	}

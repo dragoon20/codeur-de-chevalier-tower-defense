@@ -5,36 +5,44 @@
 MainMenu::MenuResult MainMenu::Show(sf::RenderWindow& window)
 {
 
-  //Load menu image from file
-  sf::Image image;
-  image.LoadFromFile("images/MainMenu.png");
-  sf::Sprite sprite(image);
+	//Load menu image from file
+	sf::Image image;
+	image.LoadFromFile("images/MainScreen.png");
+	sf::Sprite sprite(image);
 
-  //Setup clickable regions
+	//Setup clickable regions
 
-  //Play menu item coordinates
-  MenuItem playButton;
-  playButton.rect.Top= 145;
-  playButton.rect.Bottom = 380;
-  playButton.rect.Left = 0;
-  playButton.rect.Right = 1023;
-  playButton.action = Play;
+	//Play menu item coordinates
+	MenuItem playButton1;
+	playButton1.rect.Top= 35;
+	playButton1.rect.Bottom =103;
+	playButton1.rect.Left = 35;
+	playButton1.rect.Right = 367;
+	playButton1.action = Play1;
 
-  //Exit menu item coordinates
-  MenuItem exitButton;
-  exitButton.rect.Left = 0;
-  exitButton.rect.Right = 1023;
-  exitButton.rect.Top = 383;
-  exitButton.rect.Bottom = 560;
-  exitButton.action = Exit;
+	MenuItem playButton2;
+	playButton2.rect.Top= 130;
+	playButton2.rect.Bottom = 198;
+	playButton2.rect.Left = 35;
+	playButton2.rect.Right = 367;
+	playButton2.action = Play2;
 
-  _menuItems.push_back(playButton);
-  _menuItems.push_back(exitButton);
+	//Exit menu item coordinates
+	MenuItem helpButton;
+	helpButton.rect.Left = 0;
+	helpButton.rect.Right = 1023;
+	helpButton.rect.Top = 383;
+	helpButton.rect.Bottom = 560;
+	helpButton.action = Help;
 
-  window.Draw(sprite);
-  window.Display();
+	_menuItems.push_back(playButton1);
+	_menuItems.push_back(playButton2);
+	_menuItems.push_back(helpButton);
 
-  return GetMenuResponse(window);
+	window.Draw(sprite);
+	window.Display();
+
+	return GetMenuResponse(window);
 }
 
 MainMenu::MenuResult MainMenu::HandleClick(int x, int y)

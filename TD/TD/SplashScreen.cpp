@@ -5,7 +5,7 @@
 void SplashScreen::Show(sf::RenderWindow & renderWindow)
 {
 	sf::Image image;
-	if(image.LoadFromFile("images/MainScreen.jpg") != true)
+	if(image.LoadFromFile("images/MainScreen.png") != true)
 	{
 		return;
 	}
