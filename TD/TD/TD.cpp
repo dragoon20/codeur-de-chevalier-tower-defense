@@ -32,8 +32,6 @@ static sf::RenderWindow _mainWindow;
 static GameObjectManager _gameObjectManager;
 static Field _field;
 
-//static sf::Image	_imageTower;
-//static sf::Sprite	_spriteTower;
 static sf::Image	_imageTowerBlue;
 static sf::Image	_imageTowerRed;
 static sf::Image	_imageTowerGreen;
@@ -148,34 +146,6 @@ MenuItem GetMenuResponse(sf::RenderWindow& window)
 	}
 }
 
-/*
-void getPath(int x, int y, int path_idx) {
-	if ((_field.node[x][y-1].getProperties() == 'O') && ((y-1) >=0)) { //atas 
-		path[path_idx + 1] = 0;
-		getPath(x, y-1, path_idx+1);
-		break;
-	}
-	if ((_field.node[x+1][y].getProperties() == 'O') && ((x+1) < 50)) { //bawah
-		path[path_idx + 1] = 1;
-		getPath(x+1, y, path_idx+1);
-		break;
-	}
-	if ((_field.node[x][y+1].getProperties() == 'O') && ((y+1) < 50)) { //kanan 
-		path[path_idx + 1] = 2;
-		getPath(x, y+1, path_idx+1);
-		break;
-	}
-	if ((_field.node[x-1][y].getProperties() == 'O') && ((x-1) >=0)) { //kiri
-		path[path_idx + 1] = 3;
-		getPath(x-1, y, path_idx+1);
-		break;
-	}
-}
-_field.findStartNode();
-int startX = _field.getStartx();
-int startY = _field.getStarty();
-*/
-
 /* ---- Bagian Persiapan ---- */
 
 /* Program Utama */
@@ -186,6 +156,7 @@ int main()
 	vector<Enemy> musuh;
 	vector<Tower> tower;
 	vector<sf::String> kata2;
+	vector<sf::Sprite> stower;
 
 	Field field;
 	int enemygold = 10;
@@ -193,10 +164,10 @@ int main()
 	Enemy * listmusuh = getEnemylist();
 	Tower * listtower = getTowerList();
 
-	musuh.push_back(listmusuh[0]);
-	musuh.push_back(listmusuh[1]);
-	musuh.push_back(listmusuh[2]);
-	musuh.push_back(listmusuh[2]);
+	musuh.push_back(Enemy(listmusuh[0].getName()));
+	musuh.push_back(Enemy(listmusuh[1].getName()));
+	musuh.push_back(Enemy(listmusuh[2].getName()));
+	musuh.push_back(Enemy(listmusuh[2].getName()));
 	tower.push_back(Tower(3,3,"Splash"));
 	tower.push_back(Tower(3,5,"Splash"));
 
@@ -210,17 +181,26 @@ int main()
 	_mainWindow.SetFramerateLimit(60);
 	_field.Load("example.txt");
 	
-	//_imageTower.LoadFromFile("images/tower.png");
-	//_spriteTower.SetImage(_imageTower);
-	_imageTowerBlue.LoadFromFile("images/tower_blue.png");
 	_imageTowerRed.LoadFromFile("images/tower_red.png");
+	_imageTowerBlue.LoadFromFile("images/tower_blue.png");
 	_imageTowerGreen.LoadFromFile("images/tower_green.png");
-	_spriteTowerBlue.SetImage(_imageTowerBlue);
 	_spriteTowerRed.SetImage(_imageTowerRed);
+	_spriteTowerRed.SetSubRect(sf::IntRect(0,0,64,64));
+	_spriteTowerRed.SetPosition(16*64+64, 300);
+	_spriteTowerBlue.SetImage(_imageTowerBlue);
+	_spriteTowerBlue.SetSubRect(sf::IntRect(0,0,64,64));
+	_spriteTowerBlue.SetPosition(16*64+64, 400);
 	_spriteTowerGreen.SetImage(_imageTowerGreen);
-	
+	_spriteTowerGreen.SetSubRect(sf::IntRect(0,0,64,64));
+	_spriteTowerGreen.SetPosition(16*64+64, 500);
+
+	stower.push_back(_spriteTowerRed);
+	stower.push_back(_spriteTowerBlue);
+	stower.push_back(_spriteTowerGreen);
+
 	_imageEnemy.LoadFromFile("images/aliens.png");
 	_spriteEnemy.SetImage(_imageEnemy);
+
 	int c = 0; 
 	int r = 0;
 	bool facingRight = false;
@@ -311,28 +291,28 @@ int main()
 				_menuItems.push_back(exitButton);
 
 				MenuItem towerButton1;
-				towerButton1.rect.Top= 145;
-				towerButton1.rect.Bottom = 380;
-				towerButton1.rect.Left = 0;
-				towerButton1.rect.Right = 1023;
+				towerButton1.rect.Top= 300;
+				towerButton1.rect.Bottom = 364;
+				towerButton1.rect.Left = 16*64+64;
+				towerButton1.rect.Right = 16*64+128;
 				towerButton1.action = Build;
 				towerButton1.id = 1;
 				_menuItems.push_back(towerButton1);
 
 				MenuItem towerButton2;
-				towerButton2.rect.Top= 145;
-				towerButton2.rect.Bottom = 380;
-				towerButton2.rect.Left = 0;
-				towerButton2.rect.Right = 1023;
+				towerButton2.rect.Top= 400;
+				towerButton2.rect.Bottom = 464;
+				towerButton2.rect.Left = 16*64+64;
+				towerButton2.rect.Right = 16*64+128;
 				towerButton2.action = Build;
 				towerButton2.id = 2;
 				_menuItems.push_back(towerButton2);
 
 				MenuItem towerButton3;
-				towerButton3.rect.Top= 145;
-				towerButton3.rect.Bottom = 380;
-				towerButton3.rect.Left = 0;
-				towerButton3.rect.Right = 1023;
+				towerButton3.rect.Top= 500;
+				towerButton3.rect.Bottom = 564;
+				towerButton3.rect.Left = 16*64+64;
+				towerButton3.rect.Right = 16*64+128;
 				towerButton3.action = Build;
 				towerButton3.id = 3;
 				_menuItems.push_back(towerButton3);
@@ -345,7 +325,7 @@ int main()
 				tMoneyE.SetText(convert.str());
 				tMoneyE.SetSize(20);
 				tMoneyE.SetColor(sf::Color(255,255,255));
-				tMoneyE.SetPosition(16*64+20,125);
+				tMoneyE.SetPosition(16*64+20,175);
 				_mainWindow.Draw(tMoneyE);
 
 				convert.str("");
@@ -355,12 +335,17 @@ int main()
 				tMoneyP.SetText(convert.str());
 				tMoneyP.SetSize(20);
 				tMoneyP.SetColor(sf::Color(255,255,255));
-				tMoneyP.SetPosition(16*64+20,175);
+				tMoneyP.SetPosition(16*64+20,125);
 				_mainWindow.Draw(tMoneyP);
 
 				for (int i=0;i<kata2.size();++i)
 				{
 					_mainWindow.Draw(kata2[i]);
+				}
+
+				for (int i=0;i<stower.size();++i)
+				{
+					_mainWindow.Draw(stower[i]);
 				}
 
 				_mainWindow.Display();
@@ -454,7 +439,7 @@ int main()
 						{
 							bool cekmusuh = true;
 							int j = 0;
-							if ((tower[i].getTarget()!=-1)&&(abs(tower[i].getX()-musuh[tower[i].getTarget()].getX())+abs(tower[i].getY()-musuh[tower[i].getTarget()].getY())<=tower[i].getRange()))
+							if ((tower[i].getTarget()!=-1)&&(musuh[tower[i].getTarget()].getaHealth()>0)&&(abs(tower[i].getX()-musuh[tower[i].getTarget()].getX())+abs(tower[i].getY()-musuh[tower[i].getTarget()].getY())<=tower[i].getRange()))
 							// tower sudah ada target dan musuh masih dalam range
 							{
 								cout << "Tower "<< tower[i].getNama() << "(" << tower[i].getX() << "," << tower[i].getY() << ") menyerang " << musuh[j].getName()<< " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
@@ -521,6 +506,10 @@ int main()
 						for (int i=0;i<kata2.size();++i)
 						{
 							_mainWindow.Draw(kata2[i]);
+						}
+						for (int i=0;i<stower.size();++i)
+						{
+							_mainWindow.Draw(stower[i]);
 						}
 						_mainWindow.Draw(_spriteButtonStart);
 						_mainWindow.Draw(_spriteButtonExit);
@@ -622,7 +611,10 @@ int main()
 							{
 								_mainWindow.Draw(kata2[i]);
 							}
-							
+							for (int i=0;i<stower.size();++i)
+							{
+								_mainWindow.Draw(stower[i]);
+							}
 							for (int j=0;j<musuh.size();++j)
 							{								
 								if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>=0)&&(musuh[j].getPos()<pathsize))
