@@ -44,6 +44,7 @@ class Field
 		int getFinishx();
 		int getFinishy();
 
+		void getPath(int, int, int, int*);
 		void Load(string inputfile);
 		void Draw(sf::RenderWindow & renderWindow);
 
