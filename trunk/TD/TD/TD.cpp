@@ -178,7 +178,7 @@ int main()
 		return 0;
 
 	_mainWindow.Create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32),"La tour de défense");
-	_mainWindow.SetFramerateLimit(60);
+	_mainWindow.SetFramerateLimit(40);
 	_field.Load("example.txt");
 	
 	_imageTowerRed.LoadFromFile("images/tower_red.png");
@@ -200,7 +200,7 @@ int main()
 
 	_imageEnemy.LoadFromFile("images/aliens.png");
 	_spriteEnemy.SetImage(_imageEnemy);
-
+	sf::Shape HP, aHP;
 	int c = 0; 
 	int r = 0;
 	bool facingRight = false;
@@ -443,6 +443,32 @@ int main()
 							// tower sudah ada target dan musuh masih dalam range
 							{
 								cout << "Tower "<< tower[i].getNama() << "(" << tower[i].getX() << "," << tower[i].getY() << ") menyerang " << musuh[j].getName()<< " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
+								float difX = tower[i].getX() - musuh[j].getX();
+								float difY = tower[i].getY() - musuh[j].getY();
+								if (tower[i].getNama()=="Splash"){
+									cout << "SPLASH" << endl;
+									if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+										_spriteTowerBlue.SetRotation(atan(difX/difY));
+										cout << "tower " << i << endl;
+									} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+										_spriteTowerBlue.SetRotation(atan(difX/difY) + 180.0);
+										cout << "tower " << i << endl;
+									}
+								} else if (tower[i].getNama()=="Ember"){
+									cout << "EMBER" << endl;
+									if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+										_spriteTowerRed.SetRotation(atan(difX/difY));
+									} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+										_spriteTowerRed.SetRotation(atan(difX/difY) + 180.0);
+									}
+								} else if (tower[i].getNama()=="Sprout"){
+									cout << "SPROUT" << endl;
+									if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+										_spriteTowerRed.SetRotation(atan(difX/difY));
+									} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+										_spriteTowerRed.SetRotation(atan(difX/difY) + 180.0);
+									}
+								}
 
 								j = tower[i].getTarget();
 								tower[i].attack(&musuh[j]);
@@ -465,6 +491,32 @@ int main()
 									{
 										cout << "Tower "<< tower[i].getNama() << "(" << tower[i].getX() << "," << tower[i].getY() << ") menyerang " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
 
+										float difX = tower[i].getX() - musuh[j].getX();
+										float difY = tower[i].getY() - musuh[j].getY();
+										if (tower[i].getNama()=="Splash"){
+											cout << "SPLASH" << endl;
+											if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+												_spriteTowerBlue.SetRotation(atan(difX/difY));
+												cout << "tower " << i << endl;
+											} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+												_spriteTowerBlue.SetRotation(atan(difX/difY) + 180.0);
+												cout << "tower " << i << endl;
+											}
+										} else if (tower[i].getNama()=="Ember"){
+											cout << "EMBER" << endl;
+											if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+												_spriteTowerRed.SetRotation(atan(difX/difY));
+											} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+												_spriteTowerRed.SetRotation(atan(difX/difY) + 180.0);
+											}
+										} else if (tower[i].getNama()=="Sprout"){
+											cout << "SPROUT" << endl;
+											if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+												_spriteTowerRed.SetRotation(atan(difX/difY));
+											} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+												_spriteTowerRed.SetRotation(atan(difX/difY) + 180.0);
+											}
+										}
 										tower[i].setTarget(j);
 										tower[i].attack(&musuh[j]);
 										if (musuh[j].getaHealth()<=0)
@@ -559,6 +611,10 @@ int main()
 								
 								_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64);
 								_mainWindow.Draw(_spriteEnemy);
+								HP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64, /**/musuh[j].getX()*64+54, /**/musuh[j].getY()*64+5, sf::Color(255, 0, 0));
+								aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64, /**/musuh[j].getX()*64+ (musuh[j].getaHealth()/musuh[j].getHealth())*44,/**/ musuh[j].getY()*64+5, /**/sf::Color(0, 255, 0));
+								_mainWindow.Draw(HP); _mainWindow.Draw(aHP);
+								
 							}
 							else if (musuh[j].getPos()<0)
 							{
@@ -589,6 +645,7 @@ int main()
 						for (int l=0;l<20;l++){
 							_mainWindow.Clear();
 							_field.Draw(_mainWindow);
+							
 							for (int i=0;i<tower.size();++i){
 								if (tower[i].getNama()=="Splash"){
 									_spriteTowerBlue.SetSubRect(sf::IntRect(0, 0, 64, 64));
@@ -645,6 +702,9 @@ int main()
 										if (path[musuh[j].getPos()]==0){ //ke atas
 											_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64-a);
 											_mainWindow.Draw(_spriteEnemy);
+											HP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64-a, /**/musuh[j].getX()*64+54, /**/musuh[j].getY()*64+5-a, sf::Color(255, 0, 0));
+											aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64-a, /**/musuh[j].getX()*64+ (musuh[j].getaHealth()/musuh[j].getHealth())*44,/**/ musuh[j].getY()*64+5-a, /**/sf::Color(0, 255, 0));
+									
 										} else 
 										if (path[musuh[j].getPos()]==1){ //ke kanan			
 											if (facingRight == false)
@@ -654,10 +714,16 @@ int main()
 											} 
 											_spriteEnemy.SetPosition(musuh[j].getX()*64+3+a, musuh[j].getY()*64);
 											_mainWindow.Draw(_spriteEnemy);
+											HP = sf::Shape::Rectangle(musuh[j].getX()*64+10+a, musuh[j].getY()*64, musuh[j].getX()*64+54 + a, musuh[j].getY()*64+5, sf::Color(255, 0, 0));
+											aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10+a, /**/musuh[j].getY()*64, /**/musuh[j].getX()*64+ (musuh[j].getaHealth()/musuh[j].getHealth())*44 + a,/**/ musuh[j].getY()*64+5, /**/sf::Color(0, 255, 0));
+									
 										} else
 										if (path[musuh[j].getPos()]==2){ //ke bawah
 											_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64+a);
 											_mainWindow.Draw(_spriteEnemy);
+											HP = sf::Shape::Rectangle(musuh[j].getX()*64+10, musuh[j].getY()*64+a, musuh[j].getX()*64+54, musuh[j].getY()*64+5 +a, sf::Color(255, 0, 0));
+											aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64+a, /**/musuh[j].getX()*64+ (musuh[j].getaHealth()/musuh[j].getHealth())*44,/**/ musuh[j].getY()*64+5 +a, /**/sf::Color(0, 255, 0));
+									
 										} else
 										if (path[musuh[j].getPos()]==3){ //ke kiri
 											if (facingRight == true)
@@ -667,10 +733,16 @@ int main()
 											} 
 											_spriteEnemy.SetPosition(musuh[j].getX()*64+3-a, musuh[j].getY()*64);
 											_mainWindow.Draw(_spriteEnemy);
+											HP = sf::Shape::Rectangle(musuh[j].getX()*64+10-a, musuh[j].getY()*64, musuh[j].getX()*64+54-a, musuh[j].getY()*64+5, sf::Color(255, 0, 0));
+											aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10-a, /**/musuh[j].getY()*64, /**/musuh[j].getX()*64+ (musuh[j].getaHealth()/musuh[j].getHealth())*44 -a,/**/ musuh[j].getY()*64+5, /**/sf::Color(0, 255, 0));
+									
 										} else {
 									
 										}
 									}
+									
+									//draw HP bar
+									_mainWindow.Draw(HP); _mainWindow.Draw(aHP);
 								}								
 							}
 							
