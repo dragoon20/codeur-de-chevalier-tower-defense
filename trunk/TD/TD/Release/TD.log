@@ -1,0 +1,18 @@
+﻿Build started 9/28/2012 6:36:08 PM.
+     1>Project "D:\Subversion\codeur-de-chevalier-tower-defense\TD\TD\TD.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\TD.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+         TD.vcxproj -> D:\Subversion\codeur-de-chevalier-tower-defense\TD\Release\TD.exe
+       FinalizeBuildStatus:
+         Deleting file "Release\TD.unsuccessfulbuild".
+         Touching "Release\TD.lastbuildstate".
+     1>Done Building Project "D:\Subversion\codeur-de-chevalier-tower-defense\TD\TD\TD.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.05

@@ -73,6 +73,10 @@ sf::String tMoneyE;
 
 stringstream convert;
 
+void DrawTowerUpgradeInformation(Tower t);
+
+void refresh();
+
 bool IsExiting()
 {
   if(_gameState == Exiting) 
@@ -163,6 +167,80 @@ MenuItem GetMenuResponse(sf::RenderWindow& window)
 
 				if (x<16)
 				{
+					bool cekluar = true;
+					sf::Event even;
+
+					refresh();
+					sf::Sprite temp;
+					temp.SetColor(sf::Color(0,0,255,64));
+					temp.SetScaleX(64);
+					temp.SetScaleY(64);
+					temp.SetPosition(x*64,y*64);
+					window.Draw(temp);
+
+					bool cek = true;
+					int j = 0;
+					while ((cek)&&(j<tower.size()))
+					{
+						if ((tower[j].getX()==x)&&(tower[j].getY()==y))
+						{
+							cek = false;
+						}
+						j++;
+					}
+
+					j--;
+
+					if (j!=-1)
+					{
+						cout << tower[j].getNama();
+						if ((tower[j].getNama()!="Blaze")&&(tower[j].getNama()!="Torrent")&&(tower[j].getNama()!="Meadow"))
+						{
+							DrawTowerUpgradeInformation(tower[j]);
+						
+							sf::Image img;
+							img.LoadFromFile("images/button_upgrade.png");
+							sf::Sprite temp2;
+							temp2.SetImage(img);
+							temp2.SetPosition(16*64+20,500);
+							window.Draw(temp2);
+
+							img.LoadFromFile("images/button_cancel.png");
+							sf::Sprite temp3;
+							temp3.SetImage(img);
+							temp3.SetPosition(16*64+20,550);
+							window.Draw(temp3);
+
+							_mainWindow.Display();
+
+							while (cekluar)
+							{
+								_mainWindow.GetEvent(even);
+						
+								if (even.Type==sf::Event::MouseButtonReleased)
+								{
+									int tempx = even.MouseButton.X;
+									int tempy = even.MouseButton.Y;
+
+									if ((tempx>16*64+20)&&(tempx<16*64+174)&&(tempy>500)&&(tempy<535))
+									{
+										cekluar = false;
+										tower[j] = tower[j].Upgrade(tower[j].getUpgradelist(tower[j].getNama())[0].getNama());
+									}
+
+									if ((tempx>16*64+20)&&(tempx<16*64+174)&&(tempy>550)&&(tempy<585))
+									{
+										cekluar = false;
+									}
+								}
+						
+							}
+						}
+					}
+					else
+					{
+						_mainWindow.Display();
+					}					
 				}
 				else
 					return HandleClick
@@ -239,6 +317,21 @@ void refresh()
 			_spriteTowerGreen.SetCenter(32, 32);
 			_spriteTowerGreen.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
 			_mainWindow.Draw(_spriteTowerGreen);
+		} else if (tower[i].getNama()=="Torrent"){
+			_spriteTowerBlue.SetSubRect(sf::IntRect(64, 0, 128, 64));
+			_spriteTowerBlue.SetCenter(32, 32);
+			_spriteTowerBlue.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+			_mainWindow.Draw(_spriteTowerBlue);
+		} else if (tower[i].getNama()=="Blaze"){
+			_spriteTowerRed.SetSubRect(sf::IntRect(64, 0, 128, 64));
+			_spriteTowerRed.SetCenter(32, 32);
+			_spriteTowerRed.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+			_mainWindow.Draw(_spriteTowerRed);
+		} else if (tower[i].getNama()=="Meadow"){
+			_spriteTowerGreen.SetSubRect(sf::IntRect(64, 0, 128, 64));
+			_spriteTowerGreen.SetCenter(32, 32);
+			_spriteTowerGreen.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
+			_mainWindow.Draw(_spriteTowerGreen);
 		}
 	}
 
@@ -266,6 +359,66 @@ void refresh()
 	{
 		_mainWindow.Draw(stower[i]);
 	}
+}
+
+void DrawTowerUpgradeInformation(Tower t)
+{
+	sf::Sprite temp;
+	temp.SetColor(sf::Color(255,255,255));
+	temp.SetScaleX(160);
+	temp.SetScaleY(350);
+	temp.SetPosition(16*64+16,275);
+	_mainWindow.Draw(temp);
+
+	sf::String temps;
+	temps.SetColor(sf::Color(0,0,0));
+	temps.SetSize(18);
+
+	temps.SetText("Nama :");
+	temps.SetPosition(16*64+24,300);
+	_mainWindow.Draw(temps);
+
+	temps.SetText("Attack :");
+	temps.SetPosition(16*64+24,335);
+	_mainWindow.Draw(temps);
+
+	temps.SetText("Range :");
+	temps.SetPosition(16*64+24,370);
+	_mainWindow.Draw(temps);
+
+	temps.SetText("Elemen :");
+	temps.SetPosition(16*64+24,405);
+	_mainWindow.Draw(temps);
+
+	temps.SetText("Price :");
+	temps.SetPosition(16*64+24,440);
+	_mainWindow.Draw(temps);
+												
+	temps.SetText(t.getUpgradelist(t.getNama())[0].getNama());
+	temps.SetPosition(16*64+96,300);
+	_mainWindow.Draw(temps);
+
+	convert.str("");
+	convert << t.getUpgradelist(t.getNama())[0].getAttack();
+	temps.SetText(convert.str());
+	temps.SetPosition(16*64+96,335);
+	_mainWindow.Draw(temps);
+
+	convert.str("");
+	convert << t.getUpgradelist(t.getNama())[0].getRange();
+	temps.SetText(convert.str());
+	temps.SetPosition(16*64+96,370);
+	_mainWindow.Draw(temps);
+
+	temps.SetText(t.getUpgradelist(t.getNama())[0].getElement());
+	temps.SetPosition(16*64+96,405);
+	_mainWindow.Draw(temps);
+
+	convert.str("");
+	convert << t.getUpgradelist(t.getNama())[0].getPrice();
+	temps.SetText(convert.str());
+	temps.SetPosition(16*64+96,440);
+	_mainWindow.Draw(temps);
 }
 
 void DrawTowerInformation(int tempi)
@@ -453,6 +606,70 @@ int main()
 	tMoneyP.SetColor(sf::Color(255,255,255));
 	tMoneyP.SetPosition(16*64+40,180);
 
+	
+	vector<pair<int,int>> pathtower;
+	pathtower.push_back(make_pair(0,3));
+	pathtower.push_back(make_pair(1,3));
+	pathtower.push_back(make_pair(2,3));
+	pathtower.push_back(make_pair(2,4));
+	pathtower.push_back(make_pair(2,5));
+	pathtower.push_back(make_pair(2,6));
+	pathtower.push_back(make_pair(2,7));
+	pathtower.push_back(make_pair(2,8));
+	pathtower.push_back(make_pair(4,9));
+	pathtower.push_back(make_pair(4,8));
+	pathtower.push_back(make_pair(4,7));
+	pathtower.push_back(make_pair(4,6));
+	pathtower.push_back(make_pair(4,5));
+	pathtower.push_back(make_pair(4,4));
+	pathtower.push_back(make_pair(4,3));
+	pathtower.push_back(make_pair(4,2));
+	pathtower.push_back(make_pair(4,1));
+	pathtower.push_back(make_pair(6,0));
+	pathtower.push_back(make_pair(6,1));
+	pathtower.push_back(make_pair(6,2));
+	pathtower.push_back(make_pair(6,3));
+	pathtower.push_back(make_pair(6,4));
+	pathtower.push_back(make_pair(6,5));
+	pathtower.push_back(make_pair(6,6));
+	pathtower.push_back(make_pair(6,7));
+	pathtower.push_back(make_pair(6,8));
+	pathtower.push_back(make_pair(8,9));
+	pathtower.push_back(make_pair(8,8));
+	pathtower.push_back(make_pair(8,7));
+	pathtower.push_back(make_pair(8,6));
+	pathtower.push_back(make_pair(8,5));
+	pathtower.push_back(make_pair(8,4));
+	pathtower.push_back(make_pair(8,3));
+	pathtower.push_back(make_pair(8,2));
+	pathtower.push_back(make_pair(8,1));
+	pathtower.push_back(make_pair(10,0));
+	pathtower.push_back(make_pair(10,1));
+	pathtower.push_back(make_pair(10,2));
+	pathtower.push_back(make_pair(10,3));
+	pathtower.push_back(make_pair(10,4));
+	pathtower.push_back(make_pair(10,5));
+	pathtower.push_back(make_pair(10,6));
+	pathtower.push_back(make_pair(10,7));
+	pathtower.push_back(make_pair(10,8));
+	pathtower.push_back(make_pair(12,9));
+	pathtower.push_back(make_pair(12,8));
+	pathtower.push_back(make_pair(12,7));
+	pathtower.push_back(make_pair(12,6));
+	pathtower.push_back(make_pair(12,5));
+	pathtower.push_back(make_pair(12,4));
+	pathtower.push_back(make_pair(12,3));
+	pathtower.push_back(make_pair(12,2));
+	pathtower.push_back(make_pair(12,1));
+	pathtower.push_back(make_pair(14,0));
+	pathtower.push_back(make_pair(14,1));
+	pathtower.push_back(make_pair(14,2));
+	pathtower.push_back(make_pair(14,3));
+	pathtower.push_back(make_pair(14,4));
+	pathtower.push_back(make_pair(14,5));
+	pathtower.push_back(make_pair(14,6));
+	pathtower.push_back(make_pair(14,7));
+	pathtower.push_back(make_pair(14,8));
 
 	while(!IsExiting())
 	{
@@ -464,6 +681,466 @@ int main()
 			case ShowingMenu:
 			{
 				ShowMenu();
+				break;
+			}
+			case Playing2:
+			{
+				refresh();
+				_mainWindow.Display();
+
+
+				// greedy musuh di sini
+				// berdasarkan kondisi dari field saat ini
+				int max=0;
+				int felement[3];
+				for (int i=0;i<3;++i)
+					felement[i] = 0;
+				for (int i=0;i<tower.size();++i)
+				{
+					if (tower[i].getElement()=="Fire")
+					{
+						if (tower[i].getNama()=="Blaze")
+							felement[0]++;
+						felement[0]++;
+						if (felement[0]>felement[max])
+							max = 0;
+					}
+					else if (tower[i].getElement()=="Water")
+					{
+						if (tower[i].getNama()=="Torrent")
+							felement[1]++;
+						felement[1]++;
+						if (felement[1]>felement[max])
+							max = 1;
+					}
+					else if (tower[i].getElement()=="Nature")
+					{
+						if (tower[i].getNama()=="Meadow")
+							felement[2]++;
+						felement[2]++;
+						if (felement[2]>felement[max])
+							max = 2;
+					}
+				}
+				string upgrade;
+				if (max==0)
+				{
+					max = 1;
+					upgrade = "Lizardman";
+				}
+				else if (max==1)
+				{
+					max = 2;
+					upgrade = "Mandragora";
+				}
+				else
+				{
+					max = 0;
+					upgrade = "Salamander";
+				}
+				for (int i=0;i<musuh.size();++i)
+				{
+					if ((musuh[i].getName()!="Efreet")&&(musuh[i].getName()!="Undine")&&(musuh[i].getName()!="Dryad")&&(musuh[i].getElement()==listmusuh[max].getElement()))
+					{
+						if (musuh[i].getUpgradelist(musuh[i].getName())[0].getPrice()<enemygold)
+						{
+							musuh[i] = musuh[i].Upgrade(musuh[i].getUpgradelist(musuh[i].getName())[0].getName());
+							enemygold -= musuh[i].getPrice();
+						}
+					}
+				}
+				while (listmusuh[max].getPrice()<enemygold)
+				{
+					musuh.push_back(Enemy(listmusuh[max].getName()));
+					enemygold -= listmusuh[max].getPrice();
+					if (musuh[musuh.size()-1].getUpgradelist(musuh[musuh.size()-1].getName())[0].getPrice()<enemygold)
+					{
+						musuh[musuh.size()-1] = musuh[musuh.size()-1].Upgrade(musuh[musuh.size()-1].getUpgradelist(musuh[musuh.size()-1].getName())[0].getName());
+						enemygold -= musuh[musuh.size()-1].getPrice();
+					}
+				}
+
+				cout << "Susunan musuh: " << endl;
+				for (int i=0;i<musuh.size();++i)
+				{
+					cout << musuh[i].getName() << endl;
+				}
+
+				// greedy tower di sini
+				for (int i=0;i<3;++i)
+					felement[i] = 0;
+				for (int i=0;i<musuh.size();++i)
+				{
+					if (musuh[i].getElement()=="Fire")
+					{
+						if (musuh[i].getName()=="Efreet")
+							felement[0]++;
+						felement[0]++;
+						if (felement[0]>felement[max])
+							max = 0;
+					}
+					else if (musuh[i].getElement()=="Water")
+					{
+						if (musuh[i].getName()=="Undine")
+							felement[1]++;
+						felement[1]++;
+						if (felement[1]>felement[max])
+							max = 1;
+					}
+					else if (musuh[i].getElement()=="Nature")
+					{
+						if (musuh[i].getName()=="Dryad")
+							felement[2]++;
+						felement[2]++;
+						if (felement[2]>felement[max])
+							max = 2;
+					}
+				}
+				upgrade;
+				if (max==0)
+				{
+					max = 1;
+					upgrade = "Splash";
+				}
+				else if (max==1)
+				{
+					max = 2;
+					upgrade = "Sprout";
+				}
+				else
+				{
+					max = 0;
+					upgrade = "Blaze";
+				}
+
+				int j = 0;
+				for (int k=0;k<tower.size();++k)
+				{
+					if ((tower[k].getNama()!="Blaze")&&(tower[k].getNama()!="Torrent")&&(tower[k].getNama()!="Meadow")&&(tower[k].getElement()==listtower[max].getElement()))
+					{
+						if (tower[k].getUpgradelist(tower[k].getNama())[0].getPrice()<playergold)
+						{
+							cout << "Tower " << tower[k].getNama() << "(" << tower[k].getX() << "," << tower[k].getY() << ") diupgrade" << endl;
+							tower[k] = tower[k].Upgrade(tower[k].getUpgradelist(tower[k].getNama())[0].getNama());
+							playergold -= tower[k].getPrice();
+						}
+					}
+				}
+
+				while ((pathtower.size()>0)&&(listtower[max].getPrice()<playergold))
+				{
+					tower.push_back(Tower(pathtower[0].first,pathtower[0].second,listtower[max].getNama()));
+					if (tower[tower.size()-1].getUpgradelist(tower[tower.size()-1].getNama())[0].getPrice()<enemygold)
+					{
+						tower[tower.size()-1] = tower[tower.size()-1].Upgrade(tower[tower.size()-1].getUpgradelist(tower[tower.size()-1].getNama())[0].getNama());
+					}
+					enemygold -= musuh[musuh.size()-1].getPrice();
+					_field.setNode(pathtower[0].second,pathtower[0].first,'X');
+					pathtower.erase(pathtower.begin());
+					playergold-=listtower[max].getPrice();
+				}
+			
+				// menentukan jalur yang ingin dilalui musuh dengan djikstra
+				vector<int> path = _field.getPath();
+
+				int pathsize = path.size();// field.getPath().size;
+				for (int j=musuh.size()-1;j>=0;--j)
+				{
+					// set urutan, darah, kecepatan, posisi musuh dan musuh dapat pemasukan
+					musuh[j].setPos(j*-1-1);
+					musuh[j].setaHealth(musuh[j].getHealth());
+					musuh[j].setaSpeed(musuh[j].getSpeed());
+					musuh[j].setX(-1);
+					musuh[j].setY(4);
+					enemygold += musuh[j].getIncome();
+				}				
+
+				_spriteButtonStart.SetColor(sf::Color(255, 255, 255, 128));
+					
+				
+				// 
+			
+				cout << "Wave Start" << endl;
+
+				cekwave = true;
+				while (cekwave)
+				{
+					// penyerangan
+					for (int i=0;i<tower.size();++i)
+					{
+						bool cekmusuh = true;
+						if ((tower[i].getTarget()!=-1)&&(musuh[tower[i].getTarget()].getaHealth()>0)&&(abs(tower[i].getX()-musuh[tower[i].getTarget()].getX())+abs(tower[i].getY()-musuh[tower[i].getTarget()].getY())<=tower[i].getRange()))
+						// tower sudah ada target dan musuh masih dalam range
+						{
+							int j = tower[i].getTarget();
+							tower[i].attack(&musuh[j]);
+
+							cout << "Tower " << tower[i].getNama() << "(" << tower[i].getX() << "," << tower[i].getY() << ") menyerang " << musuh[j].getName()<< " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
+							cout << "Darah " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ") tinggal " << musuh[j].getaHealth() << endl;
+
+							if (musuh[j].getaHealth()<=0)
+							{
+								cout << "Tower "<< tower[i].getNama() << "(" << tower[i].getX() << "," << tower[i].getY() << ") menyerang " << musuh[j].getName()<< " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
+								/*float difX = tower[i].getX() - musuh[j].getX();
+								float difY = tower[i].getY() - musuh[j].getY();
+								tower[i].setAngle(atan(difX/difY));
+								if (tower[i].getNama()=="Splash"){
+									if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+										tower[i].setAngle(atan(difX/difY));
+									} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+										tower[i].setAngle(atan(difX/difY) + 180.0);
+									}
+								} else if (tower[i].getNama()=="Ember"){
+									if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+										_spriteTowerRed.SetRotation(atan(difX/difY));
+									} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+										_spriteTowerRed.SetRotation(atan(difX/difY) + 180.0);
+									}
+								} else if (tower[i].getNama()=="Sprout"){
+									if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+										_spriteTowerRed.SetRotation(atan(difX/difY));
+									} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+										_spriteTowerRed.SetRotation(atan(difX/difY) + 180.0);
+									}
+								}*/
+
+								j = tower[i].getTarget();
+								tower[i].attack(&musuh[j]);
+								if (musuh[j].getaHealth()<=0)
+								{
+									// musuh mati dan player dapat uang
+									playergold += musuh[j].getReward();
+									tower[i].setTarget(-1);
+									cout << "Monster " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << " tewas" << endl;
+								}
+							}
+						}
+						else
+						{	
+							int j = 0;
+							while ((cekmusuh)&&(j<musuh.size()))
+							{
+								if ((musuh[j].getaHealth()>0)&&(abs(tower[i].getX()-musuh[j].getX())+abs(tower[i].getY()-musuh[j].getY())<=tower[i].getRange()))
+								// jika tower dapat menyerang musuh (dalam jangkauan) dann tower sedang tidak ada target 
+								// health musuh berkurang
+								{
+									tower[i].setTarget(j);
+									tower[i].attack(&musuh[j]);
+								
+									cout << "Tower "<< tower[i].getNama() << "(" << tower[i].getX() << "," << tower[i].getY() << ") menyerang " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
+									cout << "Darah " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ") tinggal " << musuh[j].getaHealth() << endl;
+
+									if (musuh[j].getaHealth()<=0)
+									{
+										cout << "Tower "<< tower[i].getNama() << "(" << tower[i].getX() << "," << tower[i].getY() << ") menyerang " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
+										/*float difX = tower[i].getX() - musuh[j].getX();
+										float difY = tower[i].getY() - musuh[j].getY();
+										if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+											tower[i].setAngle(atan(difY/difX));
+										} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+											tower[i].setAngle(atan(difY/difX) + 180.0);
+										}*/
+										
+
+										tower[i].setTarget(j);
+										tower[i].attack(&musuh[j]);
+										if (musuh[j].getaHealth()<=0)
+										{
+											// musuh mati dan player dapat uang
+											playergold += musuh[j].getReward();
+											tower[i].setTarget(-1);
+											cout << "Monster " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << " tewas" << endl;
+										}
+										cekmusuh = false;
+									}
+								}						
+								j++;
+							}
+						}
+					}
+						
+					refresh();
+
+					bool cektemp = true;
+					bool cektemp2 = true;
+					int j=0;
+					c++;
+					while (j<musuh.size())
+					{
+						// cek apakah semua musuh telah mati
+						if (musuh[j].getaHealth()>0)
+							cektemp = false;
+						// musuh bergerak
+						if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>=0)&&(musuh[j].getPos()<pathsize))
+						{
+							cektemp2 = false;
+								
+							for (int k=0;k<musuh[j].getaSpeed();++k)
+							{
+								if (musuh[j].getPos()+k<pathsize)
+									musuh[j].move(path[musuh[j].getPos()+k]);								
+							}							
+								
+							cout << musuh[j].getName() << " " << j+1 << " bergerak ke titik (" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
+							/**draw enemy**/
+							if (c > 5) c = 0; 
+							if (musuh[j].getName()=="Lizardman"){
+								r = 0;
+								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
+							} else if (musuh[j].getName()=="Salamander"){
+								r = 1;
+								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
+							} else if (musuh[j].getName()=="Mandragora"){
+								r = 2;
+								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
+							} else if (musuh[j].getName()=="Undine"){
+								r = 0;
+								_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
+							} else if (musuh[j].getName()=="Efreet"){
+								r = 1;
+								_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
+							} else if (musuh[j].getName()=="Dryad"){
+								r = 2;
+								_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
+							}
+								
+
+							if ((musuh[j].getName()=="Lizardman") || (musuh[j].getName()=="Salamander") || (musuh[j].getName()=="Mandragora")){
+								_spriteEnemy.SetPosition(musuh[j].getX()*64+3,musuh[j].getY()*64);
+								_mainWindow.Draw(_spriteEnemy);
+							} else if ((musuh[j].getName()=="Undine") || (musuh[j].getName()=="Efreet") || (musuh[j].getName()=="Dryad")){
+								_spriteEnemy2.SetPosition(musuh[j].getX()*64-32,musuh[j].getY()*64-32);								
+								_mainWindow.Draw(_spriteEnemy2);
+							}
+
+							HP = sf::Shape::Rectangle(musuh[j].getX()*64+10,musuh[j].getY()*64,musuh[j].getX()*64+44,musuh[j].getY()*64+5,sf::Color(255,0,0));
+							aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10,musuh[j].getY()*64,musuh[j].getX()*64+((double)musuh[j].getaHealth()/(double)musuh[j].getHealth())*44,musuh[j].getY()*64+5,sf::Color(0,255,0));
+							
+							_mainWindow.Draw(HP);
+							_mainWindow.Draw(aHP);
+						}
+						else if (musuh[j].getPos()<0)
+						{
+							cektemp2 = false;
+						}
+							
+						if (musuh[j].getaHealth()>0){}
+							musuh[j].setPos(musuh[j].getPos()+musuh[j].getaSpeed());
+						++j;
+					}
+
+					if ((cektemp)||(cektemp2)) // kondisi wave berhenti
+					{
+						cekwave = false;
+					}
+						
+					_mainWindow.Display();
+
+					float a = 0;
+					float b = 0;
+					for (int l=0;l<20;l++)
+					{
+						refresh();
+
+						for (int j=0;j<musuh.size();++j)
+						{								
+							if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>0)&&(musuh[j].getPos()<pathsize))
+							{
+								// pilih gambar
+								if (l == 10){c++;}
+								if (c > 5) c = 0; 
+								if (musuh[j].getName()=="Lizardman"){
+									r = 0;
+									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
+								} else if (musuh[j].getName()=="Salamander"){
+									r = 1;
+									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
+								} else if (musuh[j].getName()=="Mandragora"){
+									r = 2;
+									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
+								} else if (musuh[j].getName()=="Undine"){
+									r = 0;
+									_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
+								} else if (musuh[j].getName()=="Efreet"){
+									r = 1;
+									_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
+								} else if (musuh[j].getName()=="Dryad"){
+									r = 2;
+									_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
+								}
+															
+								if (path[musuh[j].getPos()]==0)
+								{ //ke atas
+									if ((musuh[j].getName()=="Lizardman") || (musuh[j].getName()=="Salamander") || (musuh[j].getName()=="Mandragora")){
+										_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64-a);
+										_mainWindow.Draw(_spriteEnemy);
+									} else if ((musuh[j].getName()=="Undine") || (musuh[j].getName()=="Efreet") || (musuh[j].getName()=="Dryad")){
+										_spriteEnemy2.SetPosition(musuh[j].getX()*64-32, musuh[j].getY()*64-32-b);
+										_mainWindow.Draw(_spriteEnemy2);
+									}
+									HP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64-a, /**/musuh[j].getX()*64+44, /**/musuh[j].getY()*64+5-a, sf::Color(255, 0, 0));
+									aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64-a, /**/musuh[j].getX()*64+ ((double)musuh[j].getaHealth()/(double)musuh[j].getHealth())*44,/**/ musuh[j].getY()*64+5-a, /**/sf::Color(0, 255, 0));
+									
+								} else 
+								if (path[musuh[j].getPos()]==1){ //ke kanan			
+									if (facingRight == false)
+									{
+										_spriteEnemy.FlipX(true);
+										_spriteEnemy2.FlipX(true);
+										facingRight = true;
+									} 
+									if ((musuh[j].getName()=="Lizardman") || (musuh[j].getName()=="Salamander") || (musuh[j].getName()=="Mandragora")){
+										_spriteEnemy.SetPosition(musuh[j].getX()*64+3+a, musuh[j].getY()*64);
+										_mainWindow.Draw(_spriteEnemy);
+									} else if ((musuh[j].getName()=="Undine") || (musuh[j].getName()=="Efreet") || (musuh[j].getName()=="Dryad")){
+										_spriteEnemy2.SetPosition(musuh[j].getX()*64-32+b, musuh[j].getY()*64-32);
+										_mainWindow.Draw(_spriteEnemy2);
+									}
+									HP = sf::Shape::Rectangle(musuh[j].getX()*64+10+a, musuh[j].getY()*64, musuh[j].getX()*64+44 + a, musuh[j].getY()*64+5, sf::Color(255, 0, 0));
+									aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10+a, /**/musuh[j].getY()*64, /**/musuh[j].getX()*64+ ((double)musuh[j].getaHealth()/(double)musuh[j].getHealth())*44 + a,/**/ musuh[j].getY()*64+5, /**/sf::Color(0, 255, 0));
+									
+								} else
+								if (path[musuh[j].getPos()]==2){ //ke bawah
+									if ((musuh[j].getName()=="Lizardman") || (musuh[j].getName()=="Salamander") || (musuh[j].getName()=="Mandragora")){
+										_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64+a);
+										_mainWindow.Draw(_spriteEnemy);
+									} else if ((musuh[j].getName()=="Undine") || (musuh[j].getName()=="Efreet") || (musuh[j].getName()=="Dryad")){
+										_spriteEnemy2.SetPosition(musuh[j].getX()*64-32, musuh[j].getY()*64-32+b);
+										_mainWindow.Draw(_spriteEnemy2);
+									}
+									HP = sf::Shape::Rectangle(musuh[j].getX()*64+10, musuh[j].getY()*64+a, musuh[j].getX()*64+44, musuh[j].getY()*64+5 +a, sf::Color(255, 0, 0));
+									aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64+a, /**/musuh[j].getX()*64+ ((double)musuh[j].getaHealth()/(double)musuh[j].getHealth())*44,/**/ musuh[j].getY()*64+5 +a, /**/sf::Color(0, 255, 0));
+									
+								} else
+								if (path[musuh[j].getPos()]==3){ //ke kiri
+									if (facingRight == true)
+									{
+										_spriteEnemy.FlipX(true);
+										_spriteEnemy2.FlipX(true);
+										facingRight = false;
+									} 
+									if ((musuh[j].getName()=="Lizardman") || (musuh[j].getName()=="Salamander") || (musuh[j].getName()=="Mandragora")){
+										_spriteEnemy.SetPosition(musuh[j].getX()*64+3-a, musuh[j].getY()*64);
+										_mainWindow.Draw(_spriteEnemy);
+									} else if ((musuh[j].getName()=="Undine") || (musuh[j].getName()=="Efreet") || (musuh[j].getName()=="Dryad")){
+										_spriteEnemy2.SetPosition(musuh[j].getX()*64-32-b, musuh[j].getY()*64-32);
+										_mainWindow.Draw(_spriteEnemy2);
+									}
+									HP = sf::Shape::Rectangle(musuh[j].getX()*64+10-a, musuh[j].getY()*64, musuh[j].getX()*64+44-a, musuh[j].getY()*64+5, sf::Color(255, 0, 0));
+									aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10-a, /**/musuh[j].getY()*64, /**/musuh[j].getX()*64+ ((double)musuh[j].getaHealth()/(double)musuh[j].getHealth())*44 -a,/**/ musuh[j].getY()*64+5, /**/sf::Color(0, 255, 0));
+									
+								} 
+								//draw HP bar
+								_mainWindow.Draw(HP); _mainWindow.Draw(aHP);
+							}
+						}					
+						a += 64/20;
+						b += 64/20;
+						_mainWindow.Display();
+					}								
+				}			
+				// next wave
+				_spriteButtonStart.SetColor(sf::Color(255, 255, 255, 255));
 				break;
 			}
 			case Playing1:
@@ -568,6 +1245,14 @@ int main()
 
 												DrawTowerInformation(0);
 
+												sf::Image img;
+												img.LoadFromFile("images/button_cancel.png");
+												sf::Sprite temp3;
+												temp3.SetImage(img);
+												temp3.SetPosition(16*64+20,550);
+												_mainWindow.Draw(temp3);
+
+
 												_mainWindow.Display();
 											}
 											if (now.Type==sf::Event::MouseButtonReleased)
@@ -577,6 +1262,11 @@ int main()
 
 												x/=64;
 												y/=64;
+
+												if ((x>16*64+20)&&(x<16*64+174)&&(y>550)&&(y<585))
+												{
+													cek = false;
+												}
 
 												_field.setNode(y,x,'X');
 												vector<int> temppath = _field.getPath();
@@ -597,6 +1287,15 @@ int main()
 													_mainWindow.Draw(_spriteTowerRed);
 
 													_mainWindow.Display();
+												}
+												else
+												{
+													x = now.MouseButton.X;
+													y = now.MouseButton.Y;	
+													if ((x>16*64+20)&&(x<16*64+174)&&(y>550)&&(y<585))
+													{
+														cek = false;
+													}
 												}
 											}
 										}
@@ -663,12 +1362,24 @@ int main()
 
 												DrawTowerInformation(1);
 
+												sf::Image img;
+												img.LoadFromFile("images/button_cancel.png");
+												sf::Sprite temp3;
+												temp3.SetImage(img);
+												temp3.SetPosition(16*64+20,550);
+												_mainWindow.Draw(temp3);
+
 												_mainWindow.Display();
 											}
 											if (now.Type==sf::Event::MouseButtonReleased)
 											{
 												int x = now.MouseButton.X;
 												int y = now.MouseButton.Y;
+
+												if ((x>16*64+20)&&(x<16*64+174)&&(y>550)&&(y<585))
+												{
+													cek = false;
+												}
 
 												x/=64;
 												y/=64;
@@ -692,6 +1403,15 @@ int main()
 													_mainWindow.Draw(_spriteTowerBlue);
 			
 													_mainWindow.Display();
+												}
+												else
+												{
+													x = now.MouseButton.X;
+													y = now.MouseButton.Y;	
+													if ((x>16*64+20)&&(x<16*64+174)&&(y>550)&&(y<585))
+													{
+														cek = false;
+													}
 												}
 											}
 										}
@@ -755,17 +1475,15 @@ int main()
 													_mainWindow.Draw(temp);
 													_mainWindow.Draw(_spriteTowerGreen);
 												}
-												else
-												{
-													x = now.MouseMove.X;
-													y = now.MouseMove.Y;
-													if ((x>16*64+20)&&(x<16*64+173)&&(y>100)&&(y<100))
-													{
-														cek = false;
-													}
-												}
 
 												DrawTowerInformation(2);
+
+												sf::Image img;
+												img.LoadFromFile("images/button_cancel.png");
+												sf::Sprite temp3;
+												temp3.SetImage(img);
+												temp3.SetPosition(16*64+20,550);
+												_mainWindow.Draw(temp3);
 
 												_mainWindow.Display();
 											}
@@ -800,8 +1518,8 @@ int main()
 												else
 												{
 													x = now.MouseButton.X;
-													y = now.MouseButton.Y;
-													if ((x>16*64+20)&&(x<16*64+173)&&(y>100)&&(y<100))
+													y = now.MouseButton.Y;							
+													if ((x>16*64+20)&&(x<16*64+174)&&(y>550)&&(y<585))
 													{
 														cek = false;
 													}
@@ -866,25 +1584,25 @@ int main()
 				if (max==0)
 				{
 					max = 1;
-					upgrade = "Undine";
+					upgrade = "Lizardman";
 				}
 				else if (max==1)
 				{
 					max = 2;
-					upgrade = "Dryad";
+					upgrade = "Mandragora";
 				}
 				else
 				{
 					max = 0;
-					upgrade = "Efreet";
+					upgrade = "Salamander";
 				}
 				for (int i=0;i<musuh.size();++i)
 				{
 					if ((musuh[i].getName()!="Efreet")&&(musuh[i].getName()!="Undine")&&(musuh[i].getName()!="Dryad")&&(musuh[i].getElement()==listmusuh[max].getElement()))
 					{
-						if (musuh[i].getUpgradelist(upgrade)[0].getPrice()<enemygold)
+						if (musuh[i].getUpgradelist(musuh[i].getName())[0].getPrice()<enemygold)
 						{
-							musuh[i] = musuh[i].Upgrade(upgrade);
+							musuh[i] = musuh[i].Upgrade(musuh[i].getUpgradelist(musuh[i].getName())[0].getName());
 							enemygold -= musuh[i].getPrice();
 						}
 					}
@@ -893,9 +1611,9 @@ int main()
 				{
 					musuh.push_back(Enemy(listmusuh[max].getName()));
 					enemygold -= listmusuh[max].getPrice();
-					if (musuh[musuh.size()-1].getUpgradelist(upgrade)[0].getPrice()<enemygold)
+					if (musuh[musuh.size()-1].getUpgradelist(musuh[musuh.size()-1].getName())[0].getPrice()<enemygold)
 					{
-						musuh[musuh.size()-1] = musuh[musuh.size()-1].Upgrade(upgrade);
+						musuh[musuh.size()-1] = musuh[musuh.size()-1].Upgrade(musuh[musuh.size()-1].getUpgradelist(musuh[musuh.size()-1].getName())[0].getName());
 						enemygold -= musuh[musuh.size()-1].getPrice();
 					}
 				}
@@ -1208,77 +1926,75 @@ int main()
 
 				while (tutorial <= 10) {
 					refresh();
-					while (_mainWindow.GetEvent(ee)) {
-						if (tutorial == 1) {
-							_imageButtonHelp.LoadFromFile("images/help_1.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_mainWindow.Draw(_spriteButtonHelp);
-							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
-						}
-						else
-						if (tutorial == 2) {
-							_imageButtonHelp.LoadFromFile("images/help_2.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_mainWindow.Draw(_spriteButtonHelp);
-							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
-						}
-						else
-						if (tutorial == 3) {
-							_imageButtonHelp.LoadFromFile("images/help_3.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_mainWindow.Draw(_spriteButtonHelp);
-							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
-						}
-						else
-						if (tutorial == 4) {
-							_imageButtonHelp.LoadFromFile("images/help_4.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_mainWindow.Draw(_spriteButtonHelp);
-							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
-						}
-						else
-						if (tutorial == 5) {
-							_imageButtonHelp.LoadFromFile("images/help_5.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_mainWindow.Draw(_spriteButtonHelp);
-							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;				
-						}
-						else
-						if (tutorial == 6) {
-							_imageButtonHelp.LoadFromFile("images/help_6.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_mainWindow.Draw(_spriteButtonHelp);
-							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
-						}
-						else
-						if (tutorial == 7) {
-							_imageButtonHelp.LoadFromFile("images/help_7.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_mainWindow.Draw(_spriteButtonHelp);
-							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
-						}
-						else 
-						if (tutorial == 8) {
-							_imageButtonHelp.LoadFromFile("images/help_8.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_mainWindow.Draw(_spriteButtonHelp);
-							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
-						}
-						else
-						if (tutorial == 9) {
-							_imageButtonHelp.LoadFromFile("images/help_9.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_mainWindow.Draw(_spriteButtonHelp);
-							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
-						}
-						else {
-							_gameState = ShowingMenu;
-							break;
-						}
-						if (_gameState == ShowingMenu) break;
-						_mainWindow.Display();
-						//for (int i=1; i<600000000; i++) { }
+					_mainWindow.GetEvent(ee);
+					if (tutorial == 1) {
+						_imageButtonHelp.LoadFromFile("images/help_1.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
 					}
+					else
+					if (tutorial == 2) {
+						_imageButtonHelp.LoadFromFile("images/help_2.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+					}
+					else
+					if (tutorial == 3) {
+						_imageButtonHelp.LoadFromFile("images/help_3.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+					}
+					else
+					if (tutorial == 4) {
+						_imageButtonHelp.LoadFromFile("images/help_4.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+					}
+					else
+					if (tutorial == 5) {
+						_imageButtonHelp.LoadFromFile("images/help_5.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;				
+					}
+					else
+					if (tutorial == 6) {
+						_imageButtonHelp.LoadFromFile("images/help_6.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+					}
+					else
+					if (tutorial == 7) {
+						_imageButtonHelp.LoadFromFile("images/help_7.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+					}
+					else 
+					if (tutorial == 8) {
+						_imageButtonHelp.LoadFromFile("images/help_8.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+					}
+					else
+					if (tutorial == 9) {
+						_imageButtonHelp.LoadFromFile("images/help_9.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+					}
+					else {
+						_gameState = ShowingMenu;
+						break;
+					}
+					if (_gameState == ShowingMenu) break;
+					_mainWindow.Display();
 				}
 
 				break;

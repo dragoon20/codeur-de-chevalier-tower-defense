@@ -329,7 +329,7 @@ Enemy Enemy::Upgrade (string Name)
 Enemy* Enemy::getUpgradelist (string Name)
 {
 	Enemy* pointer;
-	if (this->Name=="Salamander")
+	if (Name=="Salamander")
 	{
 		pointer = new Enemy[1];
 		pointer[0].setName("Efreet");
@@ -339,7 +339,7 @@ Enemy* Enemy::getUpgradelist (string Name)
 		pointer[0].setIncome(5);
 		pointer[0].setElement("Fire");
 	}
-	else if (this->Name=="Lizardman")
+	else if (Name=="Lizardman")
 	{
 		pointer = new Enemy[1];
 		pointer[0].setName("Undine");
@@ -349,7 +349,7 @@ Enemy* Enemy::getUpgradelist (string Name)
 		pointer[0].setIncome(5);
 		pointer[0].setElement("Water");
 	}
-	else if (this->Name=="Mandragora")
+	else if (Name=="Mandragora")
 	{
 		pointer = new Enemy[1];
 		pointer[0].setName("Dryad");
