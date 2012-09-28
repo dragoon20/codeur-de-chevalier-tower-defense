@@ -44,26 +44,17 @@ static sf::Image	_imageEnemy2;
 static sf::Sprite	_spriteEnemy;
 static sf::Sprite	_spriteEnemy2;
 
-
 static sf::Image	_imageTile;
 static sf::Sprite	_spriteTile;
 
 static sf::Image	_imageButtonStart;
 static sf::Sprite	_spriteButtonStart;
 
-
 static sf::Image	_imageButtonExit;
 static sf::Sprite	_spriteButtonExit;
 
-
 static sf::Image	_imageButtonHelp;
 static sf::Sprite	_spriteButtonHelp;
-
-static sf::Image	_imageButtonHelp1;
-static sf::Sprite	_spriteButtonHelp1;
-static sf::Image	_imageButtonHelp2;
-static sf::Sprite	_spriteButtonHelp2;
-
 
 vector<Enemy> musuh;
 vector<Tower> tower;
@@ -1138,90 +1129,92 @@ int main()
 				}			
 				// next wave
 				_spriteButtonStart.SetColor(sf::Color(255, 255, 255, 255));
-
 				break;
 			}
 			
 			case Help: {
+				sf::Event ee;
 				int tutorial = 1;
 				refresh();
 				_mainWindow.Display();
+
 				while (tutorial <= 10) {
 					refresh();
-					if (tutorial == 1) {
-						_imageButtonHelp.LoadFromFile("images/help_1.png");
-						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;
-					}
-					else
-					if (tutorial == 2) {
-						_imageButtonHelp.LoadFromFile("images/help_2.png");
-						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;
-					}
-					else
-					if (tutorial == 3) {
-						_imageButtonHelp.LoadFromFile("images/help_3.png");
-						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;
-					}
-					else
-					if (tutorial == 4) {
-						_imageButtonHelp.LoadFromFile("images/help_4.png");
-						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;
-					}
-					else
-					if (tutorial == 5) {
-						_imageButtonHelp.LoadFromFile("images/help_5.png");
-						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;				
-					}
-					else
-					if (tutorial == 6) {
-						_imageButtonHelp.LoadFromFile("images/help_6.png");
-						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;
-					}
-					else
-					if (tutorial == 7) {
-						_imageButtonHelp.LoadFromFile("images/help_7.png");
-						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;
-					}
-					else 
-					if (tutorial == 8) {
-						_imageButtonHelp.LoadFromFile("images/help_8.png");
-						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;
-					}
-					else
-					if (tutorial == 9) {
-						_imageButtonHelp.LoadFromFile("images/help_9.png");
-						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;
-					}
-					else {
-						_gameState = ShowingMenu;
-						break;
-					}
-					if (_gameState == ShowingMenu) break;
-					_mainWindow.Display();
-					for (int i=1; i<600000000; i++) {
+					while (_mainWindow.GetEvent(ee)) {
+						if (tutorial == 1) {
+							_imageButtonHelp.LoadFromFile("images/help_1.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_mainWindow.Draw(_spriteButtonHelp);
+							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+						}
+						else
+						if (tutorial == 2) {
+							_imageButtonHelp.LoadFromFile("images/help_2.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_mainWindow.Draw(_spriteButtonHelp);
+							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+						}
+						else
+						if (tutorial == 3) {
+							_imageButtonHelp.LoadFromFile("images/help_3.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_mainWindow.Draw(_spriteButtonHelp);
+							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+						}
+						else
+						if (tutorial == 4) {
+							_imageButtonHelp.LoadFromFile("images/help_4.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_mainWindow.Draw(_spriteButtonHelp);
+							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+						}
+						else
+						if (tutorial == 5) {
+							_imageButtonHelp.LoadFromFile("images/help_5.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_mainWindow.Draw(_spriteButtonHelp);
+							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;				
+						}
+						else
+						if (tutorial == 6) {
+							_imageButtonHelp.LoadFromFile("images/help_6.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_mainWindow.Draw(_spriteButtonHelp);
+							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+						}
+						else
+						if (tutorial == 7) {
+							_imageButtonHelp.LoadFromFile("images/help_7.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_mainWindow.Draw(_spriteButtonHelp);
+							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+						}
+						else 
+						if (tutorial == 8) {
+							_imageButtonHelp.LoadFromFile("images/help_8.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_mainWindow.Draw(_spriteButtonHelp);
+							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+						}
+						else
+						if (tutorial == 9) {
+							_imageButtonHelp.LoadFromFile("images/help_9.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_mainWindow.Draw(_spriteButtonHelp);
+							if (ee.Type == sf::Event::MouseButtonPressed) tutorial++;
+						}
+						else {
+							_gameState = ShowingMenu;
+							break;
+						}
+						if (_gameState == ShowingMenu) break;
+						_mainWindow.Display();
+						//for (int i=1; i<600000000; i++) { }
 					}
 				}
+
 				break;
 			}
-
 			default:break;
 		}
 	}
