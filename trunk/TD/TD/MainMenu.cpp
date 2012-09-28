@@ -29,10 +29,10 @@ MainMenu::MenuResult MainMenu::Show(sf::RenderWindow& window)
 
 	//Exit menu item coordinates
 	MenuItem helpButton;
-	helpButton.rect.Left = 0;
-	helpButton.rect.Right = 1023;
-	helpButton.rect.Top = 383;
-	helpButton.rect.Bottom = 560;
+	helpButton.rect.Top = 213;
+	helpButton.rect.Bottom = 282;
+	helpButton.rect.Left = 35;
+	helpButton.rect.Right = 367;
 	helpButton.action = Help;
 
 	_menuItems.push_back(playButton1);
