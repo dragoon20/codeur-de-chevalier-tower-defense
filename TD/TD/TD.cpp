@@ -806,7 +806,7 @@ int main()
 
 				_imageButtonHelp.LoadFromFile("images/HelpScreen_1.png");
 				_spriteButtonHelp.SetImage(_imageButtonHelp);
-				_spriteButtonHelp.SetPosition(8*64+10, 120);
+				_spriteButtonHelp.SetPosition(6*64+10, 180);
 
 				_mainWindow.Draw(_spriteButtonHelp);
 				_mainWindow.Draw(_spriteButtonStart);
