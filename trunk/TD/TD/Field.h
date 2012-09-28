@@ -6,15 +6,10 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 #include "Node.h"
 
 using namespace std;
-
-typedef struct
-{
-	int *path;
-	int pathsize;
-} Path;
 
 typedef struct
 {
@@ -31,11 +26,6 @@ class Field
 		Point Start;
 		Point Finish;
 
-		int start_x; 
-		int start_y;
-		int finish_x;
-		int finish_y;
-
 		sf::Image _image;
 		sf::Sprite _sprite;
 	public :
@@ -48,7 +38,7 @@ class Field
 		int getWidth();
 		int getHeight(); 
 		char getNode(int x, int y);
-		Path getPath();
+		vector<int> getPath();
 		
 		void searchPath(int, int, int, int*);
 		void Load(string inputfile);

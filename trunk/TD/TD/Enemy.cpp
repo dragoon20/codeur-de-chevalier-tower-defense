@@ -284,8 +284,8 @@ Enemy Enemy::Upgrade (string Name)
 		this->Name = Name;
 		x = -1;
 		y = -1;
-		Speed = 1;
-		aSpeed = 1;
+		Speed = 2;
+		aSpeed = 2;
 		Health = 225;
 		aHealth = 225;
 		Price = 30;
@@ -298,8 +298,8 @@ Enemy Enemy::Upgrade (string Name)
 		this->Name = Name;
 		x = -1;
 		y = -1;
-		Speed = 1;
-		aSpeed = 1;
+		Speed = 2;
+		aSpeed = 2;
 		Health = 150;
 		aHealth = 150;
 		Price = 30;
@@ -312,8 +312,8 @@ Enemy Enemy::Upgrade (string Name)
 		this->Name = Name;
 		x = -1;
 		y = -1;
-		Speed = 1;
-		aSpeed = 1;
+		Speed = 2;
+		aSpeed = 2;
 		Health = 300;
 		aHealth = 300;
 		Price = 30;

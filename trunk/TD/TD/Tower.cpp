@@ -19,21 +19,21 @@ Tower::Tower(int basis, int ordinat, string name) {
 	Nama = name;
 	if (name == "Ember") { //Fire Level 1 
 		Price = 12; 
-		Range = 1;
+		Range = 2;
 		Attack = 50;
 		Element = "Fire";
 		Target = -1;
 	}
 	if (name == "Splash") { //Water Level 1
 		Price = 12; 
-		Range = 1;
+		Range = 2;
 		Attack = 50;
 		Element = "Water";
 		Target = -1;
 	}
 	if (name == "Sprout") { //Nature Level 1
 		Price = 12; 
-		Range = 1;
+		Range = 2;
 		Attack = 50;
 		Element = "Nature";
 		Target = -1;
@@ -160,7 +160,7 @@ Tower Tower::Upgrade(string NextName) {
 		Nama = "Blaze";
 		Element = "Fire";
 		Price = 30; 
-		Range = 1;
+		Range = 2;
 		Attack = 150;
 	}
 	else
@@ -168,7 +168,7 @@ Tower Tower::Upgrade(string NextName) {
 		Nama = "Torrent";
 		Element = "Water";
 		Price = 30; 
-		Range = 2;
+		Range = 3;
 		Attack = 100;
 	}
 	else
@@ -176,7 +176,7 @@ Tower Tower::Upgrade(string NextName) {
 		Nama = "Meadow";
 		Element = "Nature";
 		Price = 30; 
-		Range = 3;
+		Range = 4;
 		Attack = 50;
 	}
 	return *this;
@@ -188,7 +188,7 @@ Tower* Tower::getUpgradelist(string Name) {
 		ar = new Tower[1];
 		ar[0].setNama("Blaze");
 		ar[0].setElement("Fire");
-		ar[0].setRange(1);
+		ar[0].setRange(2);
 		ar[0].setAttack(150);
 		ar[0].setPrice(30);
 	}
@@ -197,7 +197,7 @@ Tower* Tower::getUpgradelist(string Name) {
 		ar = new Tower[1];
 		ar[0].setNama("Torrent");
 		ar[0].setElement("Water");
-		ar[0].setRange(2);
+		ar[0].setRange(3);
 		ar[0].setAttack(100);
 		ar[0].setPrice(30);
 
@@ -207,7 +207,7 @@ Tower* Tower::getUpgradelist(string Name) {
 		ar = new Tower[1];
 		ar[0].setNama("Meadow");
 		ar[0].setElement("Nature");
-		ar[0].setRange(3);
+		ar[0].setRange(4);
 		ar[0].setAttack(50);
 		ar[0].setPrice(30);		
 	}
@@ -220,19 +220,19 @@ Tower* getTowerList() {
 	
 	ar[0].setNama("Ember");
 	ar[0].setElement("Fire");
-	ar[0].setRange(1);
+	ar[0].setRange(2);
 	ar[0].setAttack(50);
 	ar[0].setPrice(12);
 	
 	ar[1].setNama("Splash");
 	ar[1].setElement("Water");
-	ar[1].setRange(1);
+	ar[1].setRange(2);
 	ar[1].setAttack(50);
 	ar[1].setPrice(12);
 
 	ar[2].setNama("Sprout");
 	ar[2].setElement("Nature");
-	ar[2].setRange(1);
+	ar[2].setRange(2);
 	ar[2].setAttack(50);
 	ar[2].setPrice(12);
 

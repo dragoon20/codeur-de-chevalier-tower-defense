@@ -1,4 +1,4 @@
-﻿Build started 9/28/2012 12:28:00 PM.
+﻿Build started 9/28/2012 3:18:00 PM.
      1>Project "D:\Subversion\codeur-de-chevalier-tower-defense\TD\TD\TD.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\TD.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -6,78 +6,75 @@
          All outputs are up-to-date.
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"D:\Subversion\codeur-de-chevalier-tower-defense\TD\TD\SFML-1.6\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\TD.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt TD.cpp
          TD.cpp
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(215): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(219): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(219): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(224): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(224): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(229): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(229): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(249): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(254): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(550): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(550): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(552): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(552): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(580): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(580): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(630): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(630): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(632): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(632): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(661): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(661): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(711): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(711): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(713): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(713): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(742): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(742): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(803): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(817): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(818): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(825): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(833): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(840): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(858): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(872): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(873): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(881): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(890): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(899): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(925): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(964): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(964): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(983): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1012): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(228): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(232): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(232): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(237): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(237): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(242): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(242): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(262): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(267): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(570): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(570): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(572): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(572): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(604): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(604): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(664): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(664): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(666): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(666): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(699): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(699): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(759): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(759): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(761): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(761): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(803): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(803): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(866): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(918): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(965): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1006): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1006): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1009): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1009): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1013): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1013): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1013): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1013): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1014): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1014): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
      1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1014): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1014): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1015): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1015): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1025): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1027): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1027): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1028): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1028): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1033): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1035): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1035): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1036): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1036): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1046): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1048): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1048): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1049): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1049): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1079): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1083): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1083): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1088): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1088): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1042): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1072): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1075): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1078): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1078): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1079): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1079): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1090): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1093): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1093): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1186): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1191): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1096): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1096): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1097): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1097): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1097): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1102): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1105): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1108): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1108): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1109): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1109): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1120): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1123): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1126): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1126): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1127): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1127): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>d:\subversion\codeur-de-chevalier-tower-defense\td\td\td.cpp(1127): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -106,4 +103,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.63
+Time Elapsed 00:00:01.87
