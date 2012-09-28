@@ -384,11 +384,8 @@ int main()
   
 	while(!IsExiting())
 	{
-
 		sf::Event currentEvent;
-		_mainWindow.GetEvent(currentEvent);
-
-		
+		_mainWindow.GetEvent(currentEvent);		
   
 		switch(_gameState)
 		{
@@ -763,53 +760,8 @@ int main()
 						}
 						default:break;
 					}
-					_mainWindow.Clear();
-					_field.Draw(_mainWindow);
-
-					for (int i=0;i<tower.size();++i){
-						if (tower[i].getNama()=="Splash"){
-							_spriteTowerBlue.SetSubRect(sf::IntRect(0, 0, 64, 64));
-							_spriteTowerBlue.SetCenter(32, 32);
-							_spriteTowerBlue.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
-							_mainWindow.Draw(_spriteTowerBlue);
-						} else if (tower[i].getNama()=="Ember"){
-							_spriteTowerRed.SetSubRect(sf::IntRect(0, 0, 64, 64));
-							_spriteTowerRed.SetCenter(32, 32);
-							_spriteTowerRed.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
-							_mainWindow.Draw(_spriteTowerRed);
-						} else if (tower[i].getNama()=="Sprout"){
-							_spriteTowerGreen.SetSubRect(sf::IntRect(0, 0, 64, 64));
-							_spriteTowerGreen.SetCenter(32, 32);
-							_spriteTowerGreen.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
-							_mainWindow.Draw(_spriteTowerGreen);
-						}
-					}
-
-					_mainWindow.Draw(_spriteButtonStart);
-					_mainWindow.Draw(_spriteButtonExit);
-
-					convert.str("");
-					convert << enemygold;
-
-					tMoneyE.SetText(convert.str());
-					_mainWindow.Draw(tMoneyE);
-
-					convert.str("");
-					convert << playergold;
-
-					tMoneyP.SetText(convert.str());
-					_mainWindow.Draw(tMoneyP);
-
-					for (int i=0;i<kata2.size();++i)
-					{
-						_mainWindow.Draw(kata2[i]);
-					}
-
-					for (int i=0;i<stower.size();++i)
-					{
-						_mainWindow.Draw(stower[i]);
-					}
-
+					
+					refresh();
 					_mainWindow.Display();
 				}
 
@@ -918,27 +870,36 @@ int main()
 
 										float difX = tower[i].getX() - musuh[j].getX();
 										float difY = tower[i].getY() - musuh[j].getY();
-										if (tower[i].getNama()=="Splash"){
+										if (tower[i].getNama()=="Splash")
+										{
 											cout << "SPLASH" << endl;
-											if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+											if (musuh[j].getY() <= tower[i].getY())
+											{ //musuh di sebelah atas tower
 												_spriteTowerBlue.SetRotation(atan(difX/difY));
 												cout << "tower " << i << endl;
-											} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+											} else if (musuh[j].getY() > tower[i].getY())
+											{ //musuh di sebelah bawah tower
 												_spriteTowerBlue.SetRotation(atan(difX/difY) + 180.0);
 												cout << "tower " << i << endl;
 											}
-										} else if (tower[i].getNama()=="Ember"){
+										} else if (tower[i].getNama()=="Ember")
+										{
 											cout << "EMBER" << endl;
-											if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+											if (musuh[j].getY() <= tower[i].getY())
+											{ //musuh di sebelah atas tower
 												_spriteTowerRed.SetRotation(atan(difX/difY));
-											} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+											} else if (musuh[j].getY() > tower[i].getY())
+											{ //musuh di sebelah bawah tower
 												_spriteTowerRed.SetRotation(atan(difX/difY) + 180.0);
 											}
-										} else if (tower[i].getNama()=="Sprout"){
+										} else if (tower[i].getNama()=="Sprout")
+										{
 											cout << "SPROUT" << endl;
-											if (musuh[j].getY() <= tower[i].getY()){ //musuh di sebelah atas tower
+											if (musuh[j].getY() <= tower[i].getY())
+											{ //musuh di sebelah atas tower
 												_spriteTowerRed.SetRotation(atan(difX/difY));
-											} else if (musuh[j].getY() > tower[i].getY()){ //musuh di sebelah bawah tower
+											} else if (musuh[j].getY() > tower[i].getY())
+											{ //musuh di sebelah bawah tower
 												_spriteTowerRed.SetRotation(atan(difX/difY) + 180.0);
 											}
 										}
@@ -952,83 +913,37 @@ int main()
 											cout << "Monster " << musuh[j].getName() << " " << j+1 << "(" << musuh[j].getX() << "," << musuh[j].getY() << ")" << " tewas" << endl;
 										}
 									
-									cekmusuh = false;
+										cekmusuh = false;
+									}
+									j++;
 								}
-								j++;
-							}
 						
-						}
-					}
-						
-					refresh();
-
-					bool cektemp = true;
-					bool cektemp2 = true;
-					int j=0;
-					while (j<musuh.size())
-					{
-						// cek apakah semua musuh telah mati
-						if (musuh[j].getaHealth()>0)
-							cektemp = false;
-						// musuh bergerak
-						if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>=0)&&(musuh[j].getPos()<pathsize))
-						{
-							cektemp2 = false;
-								
-							for (int k=0;k<musuh[j].getaSpeed();++k)
-							{
-								musuh[j].move(path[musuh[j].getPos()+k]);								
-							}							
-								
-							cout << musuh[j].getName() << " " << j+1 << " bergerak ke titik (" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
-							/**draw enemy**/
-							c++;
-							if (c > 5) c = 0; 
-							if (musuh[j].getName()=="Lizardman"){
-								r = 0;
-								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
-							} else if (musuh[j].getName()=="Salamander"){
-								r = 1;
-								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
-							} else if (musuh[j].getName()=="Mandragora"){
-								r = 2;
-								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
-							} else if (musuh[j].getName()=="Undine"){
-								r = 0;
-								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
-							} else if (musuh[j].getName()=="Efreet"){
-								r = 1;
-								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
-							} else if (musuh[j].getName()=="Dryad"){
-								r = 2;
-								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 							}
-								
-							_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64);
-							_mainWindow.Draw(_spriteEnemy);
 						}
-						else if (musuh[j].getPos()<0)
-						{
-							cektemp2 = false;
-						}
-							
-						if (musuh[j].getaHealth()>0){}
-							musuh[j].setPos(musuh[j].getPos()+musuh[j].getaSpeed());
-						++j;
-					}
-
-					_mainWindow.Display();
-
-					float a = 0;
-					for (int l=0;l<20;l++){
+						
 						refresh();
 
-						for (int j=0;j<musuh.size();++j)
-						{								
+						bool cektemp = true;
+						bool cektemp2 = true;
+						j=0;
+						while (j<musuh.size())
+						{
+							// cek apakah semua musuh telah mati
+							if (musuh[j].getaHealth()>0)
+								cektemp = false;
+							// musuh bergerak
 							if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>=0)&&(musuh[j].getPos()<pathsize))
 							{
-								// pilih gambar
-								if (l == 10){c++;}
+								cektemp2 = false;
+								
+								for (int k=0;k<musuh[j].getaSpeed();++k)
+								{
+									musuh[j].move(path[musuh[j].getPos()+k]);								
+								}							
+								
+								cout << musuh[j].getName() << " " << j+1 << " bergerak ke titik (" << musuh[j].getX() << "," << musuh[j].getY() << ")" << endl;
+								/**draw enemy**/
+								c++;
 								if (c > 5) c = 0; 
 								if (musuh[j].getName()=="Lizardman"){
 									r = 0;
@@ -1052,10 +967,6 @@ int main()
 								
 								_spriteEnemy.SetPosition(musuh[j].getX()*64+3, musuh[j].getY()*64);
 								_mainWindow.Draw(_spriteEnemy);
-								HP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64, /**/musuh[j].getX()*64+54, /**/musuh[j].getY()*64+5, sf::Color(255, 0, 0));
-								aHP = sf::Shape::Rectangle(musuh[j].getX()*64+10, /**/musuh[j].getY()*64, /**/musuh[j].getX()*64+ (musuh[j].getaHealth()/musuh[j].getHealth())*44,/**/ musuh[j].getY()*64+5, /**/sf::Color(0, 255, 0));
-								_mainWindow.Draw(HP); _mainWindow.Draw(aHP);
-								
 							}
 							else if (musuh[j].getPos()<0)
 							{
@@ -1066,47 +977,14 @@ int main()
 								musuh[j].setPos(musuh[j].getPos()+musuh[j].getaSpeed());
 							++j;
 						}
-						
-						_mainWindow.Display();
-						a += 64/20;
 
-					}
-					if ((cektemp)||(cektemp2)) // kondisi wave berhenti
-					{
-						cekwave = false;
-					}
+						_mainWindow.Display();
 
 						float a = 0;
-						for (int l=0;l<20;l++){
-							_mainWindow.Clear();
-							_field.Draw(_mainWindow);
-							
-							for (int i=0;i<tower.size();++i){
-								if (tower[i].getNama()=="Splash"){
-									_spriteTowerBlue.SetSubRect(sf::IntRect(0, 0, 64, 64));
-									_spriteTowerBlue.SetCenter(32, 32);
-									_spriteTowerBlue.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
-									_mainWindow.Draw(_spriteTowerBlue);
-								} else if (tower[i].getNama()=="Ember"){
-									_spriteTowerRed.SetSubRect(sf::IntRect(0, 0, 64, 64));
-									_spriteTowerRed.SetCenter(32, 32);
-									_spriteTowerRed.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
-									_mainWindow.Draw(_spriteTowerRed);
-								} else if (tower[i].getNama()=="Sprout"){
-									_spriteTowerGreen.SetSubRect(sf::IntRect(0, 0, 64, 64));
-									_spriteTowerGreen.SetCenter(32, 32);
-									_spriteTowerGreen.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
-									_mainWindow.Draw(_spriteTowerGreen);
-								}
-							}
-							for (int i=0;i<kata2.size();++i)
-							{
-								_mainWindow.Draw(kata2[i]);
-							}
-							for (int i=0;i<stower.size();++i)
-							{
-								_mainWindow.Draw(stower[i]);
-							}
+						for (int l=0;l<20;l++)
+						{
+							refresh();
+
 							for (int j=0;j<musuh.size();++j)
 							{								
 								if ((musuh[j].getaHealth()>0)&&(musuh[j].getPos()>=0)&&(musuh[j].getPos()<pathsize))
@@ -1178,39 +1056,22 @@ int main()
 									
 									//draw HP bar
 									_mainWindow.Draw(HP); _mainWindow.Draw(aHP);
-								}								
-							}
-							
-							_mainWindow.Draw(_spriteButtonStart);
-							_mainWindow.Draw(_spriteButtonExit);
-							
-							convert.str("");
-							convert << enemygold;
+						
+									_mainWindow.Display();
+									a += 64/20;
 
-							tMoneyE.SetText(convert.str());
-							_mainWindow.Draw(tMoneyE);
-
-							convert.str("");
-							convert << playergold;
-
-							tMoneyP.SetText(convert.str());
-							_mainWindow.Draw(tMoneyP);
-
-							_mainWindow.Display();
-							a += 64/20;
-
-						}
-						if ((cektemp)||(cektemp2)) // kondisi wave berhenti
-						{
-							cekwave = false;
+								}
+								if ((cektemp)||(cektemp2)) // kondisi wave berhenti
+								{
+									cekwave = false;
+								}
+							}								
 						}
 					}
-					// next wave
-					_spriteButtonStart.SetColor(sf::Color(255, 255, 255, 255));
 				}
-				break;	
+				// next wave
+				_spriteButtonStart.SetColor(sf::Color(255, 255, 255, 255));
 			}
-
 			case Help: {
 				_mainWindow.Clear();
 				_field.Draw(_mainWindow);
@@ -1338,7 +1199,7 @@ int main()
 		}
 	}
 	_mainWindow.Close();
-	
 	return 0;
 }
+
 
