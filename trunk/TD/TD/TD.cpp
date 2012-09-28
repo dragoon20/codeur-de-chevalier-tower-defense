@@ -1149,83 +1149,64 @@ int main()
 				while (tutorial <= 10) {
 					refresh();
 					if (tutorial == 1) {
-						_imageButtonHelp.LoadFromFile("images/HelpScreen_1.png");
-						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,368,276));
+						_imageButtonHelp.LoadFromFile("images/help_1.png");
 						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_spriteButtonHelp.SetPosition(6*64+10, 180);
 						_mainWindow.Draw(_spriteButtonHelp);
 						tutorial++;
 					}
 					else
 					if (tutorial == 2) {
-						_imageButtonHelp.LoadFromFile("images/HelpScreen_StartWave.jpg");
+						_imageButtonHelp.LoadFromFile("images/help_2.png");
 						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,300,99));
-						_spriteButtonHelp.SetPosition(11*64,-2);
 						_mainWindow.Draw(_spriteButtonHelp);
 						tutorial++;
 					}
 					else
 					if (tutorial == 3) {
-						_imageButtonHelp.LoadFromFile("images/HelpScreen_Exit.jpg");
+						_imageButtonHelp.LoadFromFile("images/help_3.png");
 						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,441,95));
-						_spriteButtonHelp.SetPosition(9*64,35);
 						_mainWindow.Draw(_spriteButtonHelp);
 						tutorial++;
 					}
 					else
 					if (tutorial == 4) {
-						_imageButtonHelp.LoadFromFile("images/HelpScreen_enemy.png");
+						_imageButtonHelp.LoadFromFile("images/help_4.png");
 						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,230,191));
-						_spriteButtonHelp.SetPosition(0,95);
 						_mainWindow.Draw(_spriteButtonHelp);
 						tutorial++;
 					}
 					else
 					if (tutorial == 5) {
-						_imageButtonHelp.LoadFromFile("images/HelpScreen_tower.png");
+						_imageButtonHelp.LoadFromFile("images/help_5.png");
 						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,260,216));
-						_spriteButtonHelp.SetPosition(25,1);
 						_mainWindow.Draw(_spriteButtonHelp);
-						tutorial++;
+						tutorial++;				
 					}
 					else
 					if (tutorial == 6) {
-						_imageButtonHelp.LoadFromFile("images/HelpScreen_path.png");
+						_imageButtonHelp.LoadFromFile("images/help_6.png");
 						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,327,272));
-						_spriteButtonHelp.SetPosition(6*64,90);
 						_mainWindow.Draw(_spriteButtonHelp);
 						tutorial++;
 					}
 					else
 					if (tutorial == 7) {
-						
-						_imageButtonHelp.LoadFromFile("images/HelpScreen_towergold.png");
+						_imageButtonHelp.LoadFromFile("images/help_7.png");
 						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,346,208));
-						_spriteButtonHelp.SetPosition(10*64+15,60);
 						_mainWindow.Draw(_spriteButtonHelp);
 						tutorial++;
 					}
 					else 
 					if (tutorial == 8) {
-							_imageButtonHelp.LoadFromFile("images/HelpScreen_enemygold.png");
-							_spriteButtonHelp.SetImage(_imageButtonHelp);
-							_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,320,192));
-							_spriteButtonHelp.SetPosition(10*64+10,120);
-							_mainWindow.Draw(_spriteButtonHelp);
-							tutorial++;
+						_imageButtonHelp.LoadFromFile("images/help_8.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_mainWindow.Draw(_spriteButtonHelp);
+						tutorial++;
 					}
 					else
 					if (tutorial == 9) {
-						_imageButtonHelp.LoadFromFile("images/HelpScreen_finish.png");
+						_imageButtonHelp.LoadFromFile("images/help_9.png");
 						_spriteButtonHelp.SetImage(_imageButtonHelp);
-						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,309,232));
-						_spriteButtonHelp.SetPosition(6*64,160);
 						_mainWindow.Draw(_spriteButtonHelp);
 						tutorial++;
 					}
