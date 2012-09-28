@@ -135,3 +135,6 @@ void Field::Draw(sf::RenderWindow & renderWindow){
 		}
 	}
 }
+
+void Field::searchPath(int, int, int, int*) {
+}

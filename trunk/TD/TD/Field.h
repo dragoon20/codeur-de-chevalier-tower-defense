@@ -50,7 +50,7 @@ class Field
 		char getNode(int x, int y);
 		Path getPath();
 		
-		void getPath(int, int, int, int*);
+		void searchPath(int, int, int, int*);
 		void Load(string inputfile);
 		void Draw(sf::RenderWindow & renderWindow);
 

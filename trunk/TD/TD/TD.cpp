@@ -24,7 +24,7 @@ const static int SCREEN_WIDTH = 1216;
 const static int SCREEN_HEIGHT = 640;
 
 enum GameState { Uninitialized, ShowingSplash, Paused, 
-        ShowingMenu, Playing1, Playing2, Exiting, Help };
+        ShowingMenu, Playing1, Playing2, Exiting, Help};
   
 static GameState _gameState;
 static sf::RenderWindow _mainWindow;
@@ -53,7 +53,15 @@ static sf::Sprite	_spriteButtonExit;
 
 
 static sf::Image	_imageButtonHelp;
-static sf::Sprite	_spriteButtonHelp;vector<Enemy> musuh;
+static sf::Sprite	_spriteButtonHelp;
+
+static sf::Image	_imageButtonHelp1;
+static sf::Sprite	_spriteButtonHelp1;
+static sf::Image	_imageButtonHelp2;
+static sf::Sprite	_spriteButtonHelp2;
+
+
+vector<Enemy> musuh;
 vector<Tower> tower;
 vector<sf::String> kata2;
 vector<sf::Sprite> stower;
@@ -155,7 +163,8 @@ MenuItem GetMenuResponse(sf::RenderWindow& window)
 		{
 			if(menuEvent.Type == sf::Event::MouseButtonPressed)
 			{
-				return HandleClick(menuEvent.MouseButton.X,menuEvent.MouseButton.Y);
+				return HandleClick
+					(menuEvent.MouseButton.X,menuEvent.MouseButton.Y);
 			}
 			if(menuEvent.Type == sf::Event::Closed)
 			{
@@ -382,6 +391,72 @@ int main()
 
 	_gameState = ShowingMenu;
   
+	//Inisialisasi bagian2
+	tPlayerM.SetText("Player Money: ");
+	tPlayerM.SetSize(20);
+	tPlayerM.SetColor(sf::Color(255,255,255));
+	tPlayerM.SetPosition(16*64+20,155);
+	kata2.push_back(tPlayerM);
+
+	tEnemyM.SetText("Enemy Money: ");
+	tEnemyM.SetSize(20);
+	tEnemyM.SetColor(sf::Color(255,255,255));
+	tEnemyM.SetPosition(16*64+20,205);
+	kata2.push_back(tEnemyM);
+
+	//Bikin tombol-tombol menu
+	MenuItem startButton;
+	startButton.rect.Top= 10;
+	startButton.rect.Bottom = 48;
+	startButton.rect.Left = 16*64+20;
+	startButton.rect.Right = 16*64+173;
+	startButton.action = Start;
+	_menuItems.push_back(startButton);
+					
+	MenuItem exitButton;
+	exitButton.rect.Top= 65;
+	exitButton.rect.Bottom = 102;
+	exitButton.rect.Left = 16*64+20;
+	exitButton.rect.Right = 16*64+173;
+	exitButton.action = Exit;
+	_menuItems.push_back(exitButton);
+
+	MenuItem towerButton1;
+	towerButton1.rect.Top= 300;
+	towerButton1.rect.Bottom = 364;
+	towerButton1.rect.Left = 16*64+64;
+	towerButton1.rect.Right = 16*64+128;
+	towerButton1.action = Build;
+	towerButton1.id = 1;
+	_menuItems.push_back(towerButton1);
+
+	MenuItem towerButton2;
+	towerButton2.rect.Top= 400;
+	towerButton2.rect.Bottom = 464;
+	towerButton2.rect.Left = 16*64+64;
+	towerButton2.rect.Right = 16*64+128;
+	towerButton2.action = Build;
+	towerButton2.id = 2;
+	_menuItems.push_back(towerButton2);
+
+	MenuItem towerButton3;
+	towerButton3.rect.Top= 500;
+	towerButton3.rect.Bottom = 564;
+	towerButton3.rect.Left = 16*64+64;
+	towerButton3.rect.Right = 16*64+128;
+	towerButton3.action = Build;
+	towerButton3.id = 3;
+	_menuItems.push_back(towerButton3);
+
+	tMoneyE.SetSize(20);
+	tMoneyE.SetColor(sf::Color(255,255,255));
+	tMoneyE.SetPosition(16*64+40,230);
+
+	tMoneyP.SetSize(20);
+	tMoneyP.SetColor(sf::Color(255,255,255));
+	tMoneyP.SetPosition(16*64+40,180);
+
+
 	while(!IsExiting())
 	{
 		sf::Event currentEvent;
@@ -396,76 +471,6 @@ int main()
 			}
 			case Playing1:
 			{
-				//Inisialisasi bagian2
-				tPlayerM.SetText("Player Money: ");
-				tPlayerM.SetSize(20);
-				tPlayerM.SetColor(sf::Color(255,255,255));
-				tPlayerM.SetPosition(16*64+20,155);
-				kata2.push_back(tPlayerM);
-
-				tEnemyM.SetText("Enemy Money: ");
-				tEnemyM.SetSize(20);
-				tEnemyM.SetColor(sf::Color(255,255,255));
-				tEnemyM.SetPosition(16*64+20,205);
-				kata2.push_back(tEnemyM);
-
-				//Bikin tombol-tombol menu
-				MenuItem startButton;
-				startButton.rect.Top= 10;
-				startButton.rect.Bottom = 48;
-				startButton.rect.Left = 16*64+20;
-				startButton.rect.Right = 16*64+173;
-				startButton.action = Start;
-				_menuItems.push_back(startButton);
-					
-				MenuItem exitButton;
-				exitButton.rect.Top= 65;
-				exitButton.rect.Bottom = 102;
-				exitButton.rect.Left = 16*64+20;
-				exitButton.rect.Right = 16*64+173;
-				exitButton.action = Exit;
-				_menuItems.push_back(exitButton);
-
-				MenuItem towerButton1;
-				towerButton1.rect.Top= 300;
-				towerButton1.rect.Bottom = 364;
-				towerButton1.rect.Left = 16*64+64;
-				towerButton1.rect.Right = 16*64+128;
-				towerButton1.action = Build;
-				towerButton1.id = 1;
-				_menuItems.push_back(towerButton1);
-
-				MenuItem towerButton2;
-				towerButton2.rect.Top= 400;
-				towerButton2.rect.Bottom = 464;
-				towerButton2.rect.Left = 16*64+64;
-				towerButton2.rect.Right = 16*64+128;
-				towerButton2.action = Build;
-				towerButton2.id = 2;
-				_menuItems.push_back(towerButton2);
-
-				MenuItem towerButton3;
-				towerButton3.rect.Top= 500;
-				towerButton3.rect.Bottom = 564;
-				towerButton3.rect.Left = 16*64+64;
-				towerButton3.rect.Right = 16*64+128;
-				towerButton3.action = Build;
-				towerButton3.id = 3;
-				_menuItems.push_back(towerButton3);
-
-				convert << enemygold;
-
-				tMoneyE.SetSize(20);
-				tMoneyE.SetColor(sf::Color(255,255,255));
-				tMoneyE.SetPosition(16*64+40,230);
-
-				convert.str("");
-				convert << playergold;
-
-				tMoneyP.SetSize(20);
-				tMoneyP.SetColor(sf::Color(255,255,255));
-				tMoneyP.SetPosition(16*64+40,180);
-
 				refresh();
 				_mainWindow.Display();
 
@@ -1072,130 +1077,106 @@ int main()
 
 				break;
 			}
-			case Help: 
-			{
-				_mainWindow.Clear();
-				_field.Draw(_mainWindow);
-				for (int i=0;i<tower.size();++i){
-					if (tower[i].getNama()=="Splash"){
-						_spriteTowerBlue.SetSubRect(sf::IntRect(0, 0, 64, 64));
-						_spriteTowerBlue.SetCenter(32, 32);
-						_spriteTowerBlue.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
-						_mainWindow.Draw(_spriteTowerBlue);
-					} else if (tower[i].getNama()=="Ember"){
-						_spriteTowerRed.SetSubRect(sf::IntRect(0, 0, 64, 64));
-						_spriteTowerRed.SetCenter(32, 32);
-						_spriteTowerRed.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
-						_mainWindow.Draw(_spriteTowerRed);
-					} else if (tower[i].getNama()=="Sprout"){
-						_spriteTowerGreen.SetSubRect(sf::IntRect(0, 0, 64, 64));
-						_spriteTowerGreen.SetCenter(32, 32);
-						_spriteTowerGreen.SetPosition(tower[i].getX()*64+32, tower[i].getY()*64+32);
-						_mainWindow.Draw(_spriteTowerGreen);
+			
+			case Help: {
+				int tutorial = 1;
+				refresh();
+				_mainWindow.Display();
+				while (tutorial <= 10) {
+					refresh();
+					if (tutorial == 1) {
+						_imageButtonHelp.LoadFromFile("images/HelpScreen_1.png");
+						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,368,276));
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_spriteButtonHelp.SetPosition(6*64+10, 180);
+						_mainWindow.Draw(_spriteButtonHelp);
+						tutorial++;
+					}
+					else
+					if (tutorial == 2) {
+						_imageButtonHelp.LoadFromFile("images/HelpScreen_StartWave.jpg");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,300,99));
+						_spriteButtonHelp.SetPosition(11*64,-2);
+						_mainWindow.Draw(_spriteButtonHelp);
+						tutorial++;
+					}
+					else
+					if (tutorial == 3) {
+						_imageButtonHelp.LoadFromFile("images/HelpScreen_Exit.jpg");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,441,95));
+						_spriteButtonHelp.SetPosition(9*64,35);
+						_mainWindow.Draw(_spriteButtonHelp);
+						tutorial++;
+					}
+					else
+					if (tutorial == 4) {
+						_imageButtonHelp.LoadFromFile("images/HelpScreen_enemy.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,230,191));
+						_spriteButtonHelp.SetPosition(0,95);
+						_mainWindow.Draw(_spriteButtonHelp);
+						tutorial++;
+					}
+					else
+					if (tutorial == 5) {
+						_imageButtonHelp.LoadFromFile("images/HelpScreen_tower.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,260,216));
+						_spriteButtonHelp.SetPosition(25,1);
+						_mainWindow.Draw(_spriteButtonHelp);
+						tutorial++;
+					}
+					else
+					if (tutorial == 6) {
+						_imageButtonHelp.LoadFromFile("images/HelpScreen_path.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,327,272));
+						_spriteButtonHelp.SetPosition(6*64,90);
+						_mainWindow.Draw(_spriteButtonHelp);
+						tutorial++;
+					}
+					else
+					if (tutorial == 7) {
+						
+						_imageButtonHelp.LoadFromFile("images/HelpScreen_towergold.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,346,208));
+						_spriteButtonHelp.SetPosition(10*64+15,60);
+						_mainWindow.Draw(_spriteButtonHelp);
+						tutorial++;
+					}
+					else 
+					if (tutorial == 8) {
+							_imageButtonHelp.LoadFromFile("images/HelpScreen_enemygold.png");
+							_spriteButtonHelp.SetImage(_imageButtonHelp);
+							_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,320,192));
+							_spriteButtonHelp.SetPosition(10*64+10,120);
+							_mainWindow.Draw(_spriteButtonHelp);
+							tutorial++;
+					}
+					else
+					if (tutorial == 9) {
+						_imageButtonHelp.LoadFromFile("images/HelpScreen_finish.png");
+						_spriteButtonHelp.SetImage(_imageButtonHelp);
+						_spriteButtonHelp.SetSubRect(sf::IntRect(0,0,309,232));
+						_spriteButtonHelp.SetPosition(6*64,160);
+						_mainWindow.Draw(_spriteButtonHelp);
+						tutorial++;
+					}
+					else {
+						_gameState = ShowingMenu;
+						break;
+					}
+					if (_gameState == ShowingMenu) break;
+					_mainWindow.Display();
+					for (int i=1; i<600000000; i++) {
 					}
 				}
-
-				_imageButtonHelp.LoadFromFile("images/HelpScreen_1.png");
-				_spriteButtonHelp.SetImage(_imageButtonHelp);
-				_spriteButtonHelp.SetPosition(6*64+10, 180);
-
-				_mainWindow.Draw(_spriteButtonHelp);
-				_mainWindow.Draw(_spriteButtonStart);
-				_mainWindow.Draw(_spriteButtonExit);
-
-				//Bikin text-text yang ingin ditampilkan
-				sf::String tPlayerM ;
-				tPlayerM.SetText("Player Money: ");
-				tPlayerM.SetSize(20);
-				tPlayerM.SetColor(sf::Color(255,255,255));
-				tPlayerM.SetPosition(16*64+20,155);
-				kata2.push_back(tPlayerM);
-
-				sf::String tEnemyM ;
-				tEnemyM.SetText("Enemy Money: ");
-				tEnemyM.SetSize(20);
-				tEnemyM.SetColor(sf::Color(255,255,255));
-				tEnemyM.SetPosition(16*64+20,205);
-				kata2.push_back(tEnemyM);
-
-				//Bikin tombol-tombol menu
-				MenuItem startButton;
-				startButton.rect.Top= 10;
-				startButton.rect.Bottom = 48;
-				startButton.rect.Left = 16*64+20;
-				startButton.rect.Right = 16*64+173;
-				startButton.action = Start;
-				_menuItems.push_back(startButton);
-					
-				MenuItem exitButton;
-				exitButton.rect.Top= 65;
-				exitButton.rect.Bottom = 102;
-				exitButton.rect.Left = 16*64+20;
-				exitButton.rect.Right = 16*64+173;
-				exitButton.action = Exit;
-				_menuItems.push_back(exitButton);
-
-				MenuItem towerButton1;
-				towerButton1.rect.Top= 300;
-				towerButton1.rect.Bottom = 364;
-				towerButton1.rect.Left = 16*64+64;
-				towerButton1.rect.Right = 16*64+128;
-				towerButton1.action = Build;
-				towerButton1.id = 1;
-				_menuItems.push_back(towerButton1);
-
-				MenuItem towerButton2;
-				towerButton2.rect.Top= 400;
-				towerButton2.rect.Bottom = 464;
-				towerButton2.rect.Left = 16*64+64;
-				towerButton2.rect.Right = 16*64+128;
-				towerButton2.action = Build;
-				towerButton2.id = 2;
-				_menuItems.push_back(towerButton2);
-
-				MenuItem towerButton3;
-				towerButton3.rect.Top= 500;
-				towerButton3.rect.Bottom = 564;
-				towerButton3.rect.Left = 16*64+64;
-				towerButton3.rect.Right = 16*64+128;
-				towerButton3.action = Build;
-				towerButton3.id = 3;
-				_menuItems.push_back(towerButton3);
-
-				stringstream convert;
-
-				convert << enemygold;
-
-				sf::String tMoneyE;
-				tMoneyE.SetText(convert.str());
-				tMoneyE.SetSize(20);
-				tMoneyE.SetColor(sf::Color(255,255,255));
-				tMoneyE.SetPosition(16*64+40,230);
-				_mainWindow.Draw(tMoneyE);
-
-				convert.str("");
-				convert << playergold;
-
-				sf::String tMoneyP;
-				tMoneyP.SetText(convert.str());
-				tMoneyP.SetSize(20);
-				tMoneyP.SetColor(sf::Color(255,255,255));
-				tMoneyP.SetPosition(16*64+40,180);
-				_mainWindow.Draw(tMoneyP);
-
-				for (int i=0;i<kata2.size();++i)
-				{
-					_mainWindow.Draw(kata2[i]);
-				}
-
-				for (int i=0;i<stower.size();++i)
-				{
-					_mainWindow.Draw(stower[i]);
-				}
-
-				_mainWindow.Display();
 				break;
 			}
+
 			default:break;
 		}
 	}
