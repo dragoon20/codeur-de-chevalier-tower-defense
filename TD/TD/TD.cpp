@@ -158,8 +158,15 @@ MenuItem GetMenuResponse(sf::RenderWindow& window)
 		{
 			if(menuEvent.Type == sf::Event::MouseButtonPressed)
 			{
-				return HandleClick
-					(menuEvent.MouseButton.X,menuEvent.MouseButton.Y);
+				int x = menuEvent.MouseButton.X/64;
+				int y = menuEvent.MouseButton.Y/64;
+
+				if (x<16)
+				{
+				}
+				else
+					return HandleClick
+						(menuEvent.MouseButton.X,menuEvent.MouseButton.Y);
 			}
 			if(menuEvent.Type == sf::Event::Closed)
 			{
@@ -202,7 +209,7 @@ MenuItem GetMenuResponse(sf::RenderWindow& window)
 						_spriteButtonExit.SetColor(sf::Color(255, 255, 255, 255));
 					}
 				}
-			
+
 				MenuItem temp;
 				temp.action = Nothing;
 				return temp;
@@ -329,16 +336,10 @@ void DrawTowerInformation(int tempi)
 int main()
 {
 	// variabel
-	enemygold = 10;
+	enemygold = 100;
 	playergold = 100;
 	listmusuh = getEnemylist();
 	listtower = getTowerList();
-
-	
-	musuh.push_back(Enemy(listmusuh[2].getName()).Upgrade("Dryad"));
-	musuh.push_back(Enemy(listmusuh[2].getName()));
-	musuh.push_back(Enemy(listmusuh[0].getName()));
-	musuh.push_back(Enemy(listmusuh[1].getName()));
 
 	bool cekpersiapan;
 	bool cekwave;
@@ -830,7 +831,74 @@ int main()
 					
 				// greedy musuh di sini
 				// berdasarkan kondisi dari field saat ini
-			
+				int max=0;
+				int felement[3];
+				for (int i=0;i<3;++i)
+					felement[i] = 0;
+				for (int i=0;i<tower.size();++i)
+				{
+					if (tower[i].getElement()=="Fire")
+					{
+						if (tower[i].getNama()=="Blaze")
+							felement[0]++;
+						felement[0]++;
+						if (felement[0]>felement[max])
+							max = 0;
+					}
+					else if (tower[i].getElement()=="Water")
+					{
+						if (tower[i].getNama()=="Torrent")
+							felement[1]++;
+						felement[1]++;
+						if (felement[1]>felement[max])
+							max = 1;
+					}
+					else if (tower[i].getElement()=="Nature")
+					{
+						if (tower[i].getNama()=="Meadow")
+							felement[2]++;
+						felement[2]++;
+						if (felement[2]>felement[max])
+							max = 2;
+					}
+				}
+				string upgrade;
+				if (max==0)
+				{
+					max = 1;
+					upgrade = "Undine";
+				}
+				else if (max==1)
+				{
+					max = 2;
+					upgrade = "Dryad";
+				}
+				else
+				{
+					max = 0;
+					upgrade = "Efreet";
+				}
+				for (int i=0;i<musuh.size();++i)
+				{
+					if ((musuh[i].getName()!="Efreet")&&(musuh[i].getName()!="Undine")&&(musuh[i].getName()!="Dryad")&&(musuh[i].getElement()==listmusuh[max].getElement()))
+					{
+						if (musuh[i].getUpgradelist(upgrade)[0].getPrice()<enemygold)
+						{
+							musuh[i] = musuh[i].Upgrade(upgrade);
+							enemygold -= musuh[i].getPrice();
+						}
+					}
+				}
+				while (listmusuh[max].getPrice()<enemygold)
+				{
+					musuh.push_back(Enemy(listmusuh[max].getName()));
+					enemygold -= listmusuh[max].getPrice();
+					if (musuh[musuh.size()-1].getUpgradelist(upgrade)[0].getPrice()<enemygold)
+					{
+						musuh[musuh.size()-1] = musuh[musuh.size()-1].Upgrade(upgrade);
+						enemygold -= musuh[musuh.size()-1].getPrice();
+					}
+				}
 			
 				// menentukan jalur yang ingin dilalui musuh dengan djikstra
 				vector<int> path = _field.getPath();
@@ -973,19 +1041,19 @@ int main()
 							/**draw enemy**/
 							if (c > 5) c = 0; 
 							if (musuh[j].getName()=="Lizardman"){
-								r = 1;
+								r = 0;
 								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 							} else if (musuh[j].getName()=="Salamander"){
-								r = 0;
+								r = 1;
 								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 							} else if (musuh[j].getName()=="Mandragora"){
 								r = 2;
 								_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 							} else if (musuh[j].getName()=="Undine"){
-								r = 1;
+								r = 0;
 								_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
 							} else if (musuh[j].getName()=="Efreet"){
-								r = 0;
+								r = 1;
 								_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
 							} else if (musuh[j].getName()=="Dryad"){
 								r = 2;
@@ -1038,19 +1106,19 @@ int main()
 								if (l == 10){c++;}
 								if (c > 5) c = 0; 
 								if (musuh[j].getName()=="Lizardman"){
-									r = 1;
+									r = 0;
 									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 								} else if (musuh[j].getName()=="Salamander"){
-									r = 0;
+									r = 1;
 									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 								} else if (musuh[j].getName()=="Mandragora"){
 									r = 2;
 									_spriteEnemy.SetSubRect(sf::IntRect(c*58, r*64, c*58+58, r*64+64));
 								} else if (musuh[j].getName()=="Undine"){
-									r = 1;
+									r = 0;
 									_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
 								} else if (musuh[j].getName()=="Efreet"){
-									r = 0;
+									r = 1;
 									_spriteEnemy2.SetSubRect(sf::IntRect(c*128, r*96, c*128+128, r*96+96));
 								} else if (musuh[j].getName()=="Dryad"){
 									r = 2;
@@ -1123,7 +1191,7 @@ int main()
 							}
 						}					
 						a += 64/20;
-						b += 64*2/20;
+						b += 64/20;
 						_mainWindow.Display();
 					}								
 				}			

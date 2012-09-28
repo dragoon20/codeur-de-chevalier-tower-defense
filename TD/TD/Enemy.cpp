@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "Enemy.h"
 #include <cstdlib>
+#include <iostream>
+using namespace std;
 
 Enemy::Enemy()
 {
@@ -327,7 +329,7 @@ Enemy Enemy::Upgrade (string Name)
 Enemy* Enemy::getUpgradelist (string Name)
 {
 	Enemy* pointer;
-	if (Name=="Salamander")
+	if (this->Name=="Salamander")
 	{
 		pointer = new Enemy[1];
 		pointer[0].setName("Efreet");
@@ -350,7 +352,7 @@ Enemy* Enemy::getUpgradelist (string Name)
 	else if (this->Name=="Mandragora")
 	{
 		pointer = new Enemy[1];
-		pointer[0].setName("Undine");
+		pointer[0].setName("Dryad");
 		pointer[0].setSpeed(1);
 		pointer[0].setHealth(300);
 		pointer[0].setPrice(30);
