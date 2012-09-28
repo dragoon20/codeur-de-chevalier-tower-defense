@@ -255,6 +255,7 @@ Enemy* getEnemylist ()
 	pointer[0].setHealth(75);
 	pointer[0].setPrice(2);
 	pointer[0].setIncome(1);
+	pointer[0].setReward(1);
 	pointer[0].setElement("Fire");
 	
 	pointer[1].setName("Lizardman");
@@ -262,6 +263,7 @@ Enemy* getEnemylist ()
 	pointer[1].setHealth(75);
 	pointer[1].setPrice(2);
 	pointer[1].setIncome(1);
+	pointer[1].setReward(1);
 	pointer[1].setElement("Water");
 	
 	pointer[2].setName("Mandragora");
@@ -269,6 +271,7 @@ Enemy* getEnemylist ()
 	pointer[2].setHealth(75);
 	pointer[2].setPrice(2);
 	pointer[2].setIncome(1);
+	pointer[2].setReward(1);
 	pointer[2].setElement("Nature");
 
 	return pointer;

@@ -27,9 +27,9 @@ void Field::setWidth(int w){
 void Field::setHeight(int h){
 	height = h;
 }
-void Field::setNode(int x, int y, char c)
+void Field::setNode(int y, int x, char c)
 {
-	node[x][y].setProperties(c);
+	node[y][x].setProperties(c);
 }
 int Field::getWidth(){
 	return width;
@@ -37,9 +37,9 @@ int Field::getWidth(){
 int Field::getHeight(){
 	return height;
 }
-char Field::getNode(int x, int y)
+char Field::getNode(int y, int x)
 {
-	return node[x][y].getProperties();
+	return node[y][x].getProperties();
 }
 Path Field::getPath()
 {
