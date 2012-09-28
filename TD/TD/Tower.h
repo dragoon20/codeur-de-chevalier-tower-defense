@@ -22,6 +22,7 @@ class Tower {
 		void setRange(int);
 		void setAttack(int);
 
+
 		int getX();
 		int getY();
 		int getPrice();
@@ -30,6 +31,7 @@ class Tower {
 		int getTarget();
 		int getRange();
 		int getAttack();
+		
 
 		void attack(Enemy*);
 
@@ -45,6 +47,7 @@ class Tower {
 		string Element;
 		string Nama;
 		int Target; // nomor urut musuh pada array di controller
+		float Angle;
 };
 
 Tower* getTowerList();
